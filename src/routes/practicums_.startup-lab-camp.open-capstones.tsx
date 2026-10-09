@@ -144,7 +144,7 @@ function OpenCapstones() {
                   ))}
                 </ul>
                 <p className="mt-5 border-t border-border pt-5 text-sm font-semibold">
-                  comming soon
+                  coming soon
                 </p>
               </article>
             ))}
