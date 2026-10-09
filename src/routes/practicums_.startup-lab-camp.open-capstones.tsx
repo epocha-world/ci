@@ -143,21 +143,9 @@ function OpenCapstones() {
                     </li>
                   ))}
                 </ul>
-                <dl className="mt-5 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 border-t border-border pt-5 text-sm">
-                  {[
-                    ["Age", item.age],
-                    ["Location", item.location],
-                    ["Cost", item.fees],
-                    ["w/h add on", item.workshopAddon],
-                  ]
-                    .filter(([, value]) => value)
-                    .map(([label, value]) => (
-                      <div key={label} className="contents">
-                        <dt>{t(label!)}</dt>
-                        <dd className="text-right font-semibold">{t(value!)}</dd>
-                      </div>
-                    ))}
-                </dl>
+                <p className="mt-5 border-t border-border pt-5 text-sm font-semibold">
+                  comming soon
+                </p>
               </article>
             ))}
           </div>
