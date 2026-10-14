@@ -1,4 +1,5 @@
 import { CapstonePartner } from "@/components/camp/CapstonePartner";
+import { CapstoneActions } from "@/components/camp/CapstoneActions";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useI18n } from "@/i18n";
 import { createSeoHead } from "@/lib/seo";
@@ -53,6 +54,7 @@ function CapstoneDetail() {
         <h1 className="mt-5 max-w-4xl text-4xl font-bold md:text-6xl">{t(item.title)}</h1>
         <CapstonePartner item={item} />
         <p className="mt-8 max-w-3xl text-lg leading-relaxed">{t(item.summary)}</p>
+        <CapstoneActions item={item} />
         <div className="mt-12 grid gap-10 lg:grid-cols-[2fr_1fr]">
           <div>
             {item.brief !== item.summary && (

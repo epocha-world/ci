@@ -13,7 +13,20 @@ export function CapstonePartner({ item }: { item: CampCapstone }) {
           className="h-10 w-16 rounded bg-white p-1 object-contain"
         />
       )}
-      <p className="font-semibold">{item.partner}</p>
+      <p className="font-semibold" data-capstone-partner>
+        {item.partnerUrl ? (
+          <a
+            href={item.partnerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-4 hover:text-lime"
+          >
+            {item.partner}
+          </a>
+        ) : (
+          item.partner
+        )}
+      </p>
     </div>
   );
 }
