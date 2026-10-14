@@ -9,74 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SafeguardingRouteImport } from './routes/safeguarding'
-import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PracticumsRouteImport } from './routes/practicums'
-import { Route as NewsRouteImport } from './routes/news'
-import { Route as GrowWithUsRouteImport } from './routes/grow-with-us'
-import { Route as ConnectRouteImport } from './routes/connect'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as PracticumsStartupLabCampRouteImport } from './routes/practicums_.startup-lab-camp'
-import { Route as PracticumsMiraeIndustryRouteImport } from './routes/practicums_.mirae-industry'
-import { Route as PracticumsHanaroRouteImport } from './routes/practicums_.hanaro'
-import { Route as NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRouteImport } from './routes/news_.digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
-import { Route as AboutSparkedRouteImport } from './routes/about_.sparked'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ConnectRouteImport } from './routes/connect'
+import { Route as GrowWithUsRouteImport } from './routes/grow-with-us'
+import { Route as NewsRouteImport } from './routes/news'
+import { Route as PracticumsRouteImport } from './routes/practicums'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
+import { Route as SafeguardingRouteImport } from './routes/safeguarding'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AboutOurStoryRouteImport } from './routes/about_.our-story'
-import { Route as PracticumsStartupLabCampIndexRouteImport } from './routes/practicums_.startup-lab-camp.index'
-import { Route as PracticumsStartupLabCampOpenCapstonesRouteImport } from './routes/practicums_.startup-lab-camp.open-capstones'
-import { Route as PracticumsStartupLabCampHowItWorksRouteImport } from './routes/practicums_.startup-lab-camp.how-it-works'
+import { Route as AboutSparkedRouteImport } from './routes/about_.sparked'
+import { Route as NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRouteImport } from './routes/news_.digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
+import { Route as PracticumsHanaroRouteImport } from './routes/practicums_.hanaro'
+import { Route as PracticumsMiraeIndustryRouteImport } from './routes/practicums_.mirae-industry'
+import { Route as PracticumsStartupLabCampRouteImport } from './routes/practicums_.startup-lab-camp'
 import { Route as PracticumsHanaroMarketingVoicesInMotionRouteImport } from './routes/practicums_.hanaro-marketing_.voices-in-motion'
-import { Route as PracticumsStartupLabCampPracticumLeadershipTracksRouteImport } from './routes/practicums_.startup-lab-camp.practicum.leadership-tracks'
-import { Route as PracticumsStartupLabCampPracticumCoachingProgramRouteImport } from './routes/practicums_.startup-lab-camp.practicum.coaching-program'
+import { Route as PracticumsStartupLabCampIndexRouteImport } from './routes/practicums_.startup-lab-camp.index'
+import { Route as PracticumsStartupLabCampHowItWorksRouteImport } from './routes/practicums_.startup-lab-camp.how-it-works'
+import { Route as PracticumsStartupLabCampOpenCapstonesRouteImport } from './routes/practicums_.startup-lab-camp.open-capstones'
 import { Route as PracticumsStartupLabCampCapstonesCapstoneIdRouteImport } from './routes/practicums_.startup-lab-camp.capstones.$capstoneId'
+import { Route as PracticumsStartupLabCampPracticumCoachingProgramRouteImport } from './routes/practicums_.startup-lab-camp.practicum.coaching-program'
+import { Route as PracticumsStartupLabCampPracticumLeadershipTracksRouteImport } from './routes/practicums_.startup-lab-camp.practicum.leadership-tracks'
 
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SafeguardingRoute = SafeguardingRouteImport.update({
-  id: '/safeguarding',
-  path: '/safeguarding',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RefundPolicyRoute = RefundPolicyRouteImport.update({
-  id: '/refund-policy',
-  path: '/refund-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PracticumsRoute = PracticumsRouteImport.update({
-  id: '/practicums',
-  path: '/practicums',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NewsRoute = NewsRouteImport.update({
-  id: '/news',
-  path: '/news',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GrowWithUsRoute = GrowWithUsRouteImport.update({
-  id: '/grow-with-us',
-  path: '/grow-with-us',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConnectRoute = ConnectRouteImport.update({
-  id: '/connect',
-  path: '/connect',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -84,25 +44,59 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ConnectRoute = ConnectRouteImport.update({
+  id: '/connect',
+  path: '/connect',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PracticumsStartupLabCampRoute =
-  PracticumsStartupLabCampRouteImport.update({
-    id: '/practicums_/startup-lab-camp',
-    path: '/practicums/startup-lab-camp',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const PracticumsMiraeIndustryRoute = PracticumsMiraeIndustryRouteImport.update({
-  id: '/practicums_/mirae-industry',
-  path: '/practicums/mirae-industry',
+const GrowWithUsRoute = GrowWithUsRouteImport.update({
+  id: '/grow-with-us',
+  path: '/grow-with-us',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PracticumsHanaroRoute = PracticumsHanaroRouteImport.update({
-  id: '/practicums_/hanaro',
-  path: '/practicums/hanaro',
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PracticumsRoute = PracticumsRouteImport.update({
+  id: '/practicums',
+  path: '/practicums',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundPolicyRoute = RefundPolicyRouteImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafeguardingRoute = SafeguardingRouteImport.update({
+  id: '/safeguarding',
+  path: '/safeguarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutOurStoryRoute = AboutOurStoryRouteImport.update({
+  id: '/about_/our-story',
+  path: '/about/our-story',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutSparkedRoute = AboutSparkedRouteImport.update({
+  id: '/about_/sparked',
+  path: '/about/sparked',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRoute =
@@ -111,26 +105,32 @@ const NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRoute =
     path: '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AboutSparkedRoute = AboutSparkedRouteImport.update({
-  id: '/about_/sparked',
-  path: '/about/sparked',
+const PracticumsHanaroRoute = PracticumsHanaroRouteImport.update({
+  id: '/practicums_/hanaro',
+  path: '/practicums/hanaro',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutOurStoryRoute = AboutOurStoryRouteImport.update({
-  id: '/about_/our-story',
-  path: '/about/our-story',
+const PracticumsMiraeIndustryRoute = PracticumsMiraeIndustryRouteImport.update({
+  id: '/practicums_/mirae-industry',
+  path: '/practicums/mirae-industry',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PracticumsStartupLabCampRoute =
+  PracticumsStartupLabCampRouteImport.update({
+    id: '/practicums_/startup-lab-camp',
+    path: '/practicums/startup-lab-camp',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const PracticumsHanaroMarketingVoicesInMotionRoute =
+  PracticumsHanaroMarketingVoicesInMotionRouteImport.update({
+    id: '/practicums_/hanaro-marketing_/voices-in-motion',
+    path: '/practicums/hanaro-marketing/voices-in-motion',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const PracticumsStartupLabCampIndexRoute =
   PracticumsStartupLabCampIndexRouteImport.update({
     id: '/',
     path: '/',
-    getParentRoute: () => PracticumsStartupLabCampRoute,
-  } as any)
-const PracticumsStartupLabCampOpenCapstonesRoute =
-  PracticumsStartupLabCampOpenCapstonesRouteImport.update({
-    id: '/open-capstones',
-    path: '/open-capstones',
     getParentRoute: () => PracticumsStartupLabCampRoute,
   } as any)
 const PracticumsStartupLabCampHowItWorksRoute =
@@ -139,16 +139,16 @@ const PracticumsStartupLabCampHowItWorksRoute =
     path: '/how-it-works',
     getParentRoute: () => PracticumsStartupLabCampRoute,
   } as any)
-const PracticumsHanaroMarketingVoicesInMotionRoute =
-  PracticumsHanaroMarketingVoicesInMotionRouteImport.update({
-    id: '/practicums_/hanaro-marketing_/voices-in-motion',
-    path: '/practicums/hanaro-marketing/voices-in-motion',
-    getParentRoute: () => rootRouteImport,
+const PracticumsStartupLabCampOpenCapstonesRoute =
+  PracticumsStartupLabCampOpenCapstonesRouteImport.update({
+    id: '/open-capstones',
+    path: '/open-capstones',
+    getParentRoute: () => PracticumsStartupLabCampRoute,
   } as any)
-const PracticumsStartupLabCampPracticumLeadershipTracksRoute =
-  PracticumsStartupLabCampPracticumLeadershipTracksRouteImport.update({
-    id: '/practicum/leadership-tracks',
-    path: '/practicum/leadership-tracks',
+const PracticumsStartupLabCampCapstonesCapstoneIdRoute =
+  PracticumsStartupLabCampCapstonesCapstoneIdRouteImport.update({
+    id: '/capstones/$capstoneId',
+    path: '/capstones/$capstoneId',
     getParentRoute: () => PracticumsStartupLabCampRoute,
   } as any)
 const PracticumsStartupLabCampPracticumCoachingProgramRoute =
@@ -157,10 +157,10 @@ const PracticumsStartupLabCampPracticumCoachingProgramRoute =
     path: '/practicum/coaching-program',
     getParentRoute: () => PracticumsStartupLabCampRoute,
   } as any)
-const PracticumsStartupLabCampCapstonesCapstoneIdRoute =
-  PracticumsStartupLabCampCapstonesCapstoneIdRouteImport.update({
-    id: '/capstones/$capstoneId',
-    path: '/capstones/$capstoneId',
+const PracticumsStartupLabCampPracticumLeadershipTracksRoute =
+  PracticumsStartupLabCampPracticumLeadershipTracksRouteImport.update({
+    id: '/practicum/leadership-tracks',
+    path: '/practicum/leadership-tracks',
     getParentRoute: () => PracticumsStartupLabCampRoute,
   } as any)
 
@@ -345,67 +345,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/safeguarding': {
-      id: '/safeguarding'
-      path: '/safeguarding'
-      fullPath: '/safeguarding'
-      preLoaderRoute: typeof SafeguardingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/refund-policy': {
-      id: '/refund-policy'
-      path: '/refund-policy'
-      fullPath: '/refund-policy'
-      preLoaderRoute: typeof RefundPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/practicums': {
-      id: '/practicums'
-      path: '/practicums'
-      fullPath: '/practicums'
-      preLoaderRoute: typeof PracticumsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/news': {
-      id: '/news'
-      path: '/news'
-      fullPath: '/news'
-      preLoaderRoute: typeof NewsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/grow-with-us': {
-      id: '/grow-with-us'
-      path: '/grow-with-us'
-      fullPath: '/grow-with-us'
-      preLoaderRoute: typeof GrowWithUsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/connect': {
-      id: '/connect'
-      path: '/connect'
-      fullPath: '/connect'
-      preLoaderRoute: typeof ConnectRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -415,46 +359,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/connect': {
+      id: '/connect'
+      path: '/connect'
+      fullPath: '/connect'
+      preLoaderRoute: typeof ConnectRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/practicums_/startup-lab-camp': {
-      id: '/practicums_/startup-lab-camp'
-      path: '/practicums/startup-lab-camp'
-      fullPath: '/practicums/startup-lab-camp'
-      preLoaderRoute: typeof PracticumsStartupLabCampRouteImport
+    '/grow-with-us': {
+      id: '/grow-with-us'
+      path: '/grow-with-us'
+      fullPath: '/grow-with-us'
+      preLoaderRoute: typeof GrowWithUsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/practicums_/mirae-industry': {
-      id: '/practicums_/mirae-industry'
-      path: '/practicums/mirae-industry'
-      fullPath: '/practicums/mirae-industry'
-      preLoaderRoute: typeof PracticumsMiraeIndustryRouteImport
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/practicums_/hanaro': {
-      id: '/practicums_/hanaro'
-      path: '/practicums/hanaro'
-      fullPath: '/practicums/hanaro'
-      preLoaderRoute: typeof PracticumsHanaroRouteImport
+    '/practicums': {
+      id: '/practicums'
+      path: '/practicums'
+      fullPath: '/practicums'
+      preLoaderRoute: typeof PracticumsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/news_/digital-media-and-drone-show-technology-with-yan-paul-dubbelman': {
-      id: '/news_/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
-      path: '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
-      fullPath: '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
-      preLoaderRoute: typeof NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRouteImport
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about_/sparked': {
-      id: '/about_/sparked'
-      path: '/about/sparked'
-      fullPath: '/about/sparked'
-      preLoaderRoute: typeof AboutSparkedRouteImport
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safeguarding': {
+      id: '/safeguarding'
+      path: '/safeguarding'
+      fullPath: '/safeguarding'
+      preLoaderRoute: typeof SafeguardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about_/our-story': {
@@ -464,18 +429,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutOurStoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about_/sparked': {
+      id: '/about_/sparked'
+      path: '/about/sparked'
+      fullPath: '/about/sparked'
+      preLoaderRoute: typeof AboutSparkedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news_/digital-media-and-drone-show-technology-with-yan-paul-dubbelman': {
+      id: '/news_/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
+      path: '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
+      fullPath: '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
+      preLoaderRoute: typeof NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/practicums_/hanaro': {
+      id: '/practicums_/hanaro'
+      path: '/practicums/hanaro'
+      fullPath: '/practicums/hanaro'
+      preLoaderRoute: typeof PracticumsHanaroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/practicums_/mirae-industry': {
+      id: '/practicums_/mirae-industry'
+      path: '/practicums/mirae-industry'
+      fullPath: '/practicums/mirae-industry'
+      preLoaderRoute: typeof PracticumsMiraeIndustryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/practicums_/startup-lab-camp': {
+      id: '/practicums_/startup-lab-camp'
+      path: '/practicums/startup-lab-camp'
+      fullPath: '/practicums/startup-lab-camp'
+      preLoaderRoute: typeof PracticumsStartupLabCampRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/practicums_/hanaro-marketing_/voices-in-motion': {
+      id: '/practicums_/hanaro-marketing_/voices-in-motion'
+      path: '/practicums/hanaro-marketing/voices-in-motion'
+      fullPath: '/practicums/hanaro-marketing/voices-in-motion'
+      preLoaderRoute: typeof PracticumsHanaroMarketingVoicesInMotionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/practicums_/startup-lab-camp/': {
       id: '/practicums_/startup-lab-camp/'
       path: '/'
       fullPath: '/practicums/startup-lab-camp/'
       preLoaderRoute: typeof PracticumsStartupLabCampIndexRouteImport
-      parentRoute: typeof PracticumsStartupLabCampRoute
-    }
-    '/practicums_/startup-lab-camp/open-capstones': {
-      id: '/practicums_/startup-lab-camp/open-capstones'
-      path: '/open-capstones'
-      fullPath: '/practicums/startup-lab-camp/open-capstones'
-      preLoaderRoute: typeof PracticumsStartupLabCampOpenCapstonesRouteImport
       parentRoute: typeof PracticumsStartupLabCampRoute
     }
     '/practicums_/startup-lab-camp/how-it-works': {
@@ -485,18 +485,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PracticumsStartupLabCampHowItWorksRouteImport
       parentRoute: typeof PracticumsStartupLabCampRoute
     }
-    '/practicums_/hanaro-marketing_/voices-in-motion': {
-      id: '/practicums_/hanaro-marketing_/voices-in-motion'
-      path: '/practicums/hanaro-marketing/voices-in-motion'
-      fullPath: '/practicums/hanaro-marketing/voices-in-motion'
-      preLoaderRoute: typeof PracticumsHanaroMarketingVoicesInMotionRouteImport
-      parentRoute: typeof rootRouteImport
+    '/practicums_/startup-lab-camp/open-capstones': {
+      id: '/practicums_/startup-lab-camp/open-capstones'
+      path: '/open-capstones'
+      fullPath: '/practicums/startup-lab-camp/open-capstones'
+      preLoaderRoute: typeof PracticumsStartupLabCampOpenCapstonesRouteImport
+      parentRoute: typeof PracticumsStartupLabCampRoute
     }
-    '/practicums_/startup-lab-camp/practicum/leadership-tracks': {
-      id: '/practicums_/startup-lab-camp/practicum/leadership-tracks'
-      path: '/practicum/leadership-tracks'
-      fullPath: '/practicums/startup-lab-camp/practicum/leadership-tracks'
-      preLoaderRoute: typeof PracticumsStartupLabCampPracticumLeadershipTracksRouteImport
+    '/practicums_/startup-lab-camp/capstones/$capstoneId': {
+      id: '/practicums_/startup-lab-camp/capstones/$capstoneId'
+      path: '/capstones/$capstoneId'
+      fullPath: '/practicums/startup-lab-camp/capstones/$capstoneId'
+      preLoaderRoute: typeof PracticumsStartupLabCampCapstonesCapstoneIdRouteImport
       parentRoute: typeof PracticumsStartupLabCampRoute
     }
     '/practicums_/startup-lab-camp/practicum/coaching-program': {
@@ -506,11 +506,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PracticumsStartupLabCampPracticumCoachingProgramRouteImport
       parentRoute: typeof PracticumsStartupLabCampRoute
     }
-    '/practicums_/startup-lab-camp/capstones/$capstoneId': {
-      id: '/practicums_/startup-lab-camp/capstones/$capstoneId'
-      path: '/capstones/$capstoneId'
-      fullPath: '/practicums/startup-lab-camp/capstones/$capstoneId'
-      preLoaderRoute: typeof PracticumsStartupLabCampCapstonesCapstoneIdRouteImport
+    '/practicums_/startup-lab-camp/practicum/leadership-tracks': {
+      id: '/practicums_/startup-lab-camp/practicum/leadership-tracks'
+      path: '/practicum/leadership-tracks'
+      fullPath: '/practicums/startup-lab-camp/practicum/leadership-tracks'
+      preLoaderRoute: typeof PracticumsStartupLabCampPracticumLeadershipTracksRouteImport
       parentRoute: typeof PracticumsStartupLabCampRoute
     }
   }
