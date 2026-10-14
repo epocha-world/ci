@@ -1,4 +1,18 @@
 const camp: Record<string, string> = {
+  Other: "기타",
+  "Entrepreneurship & Startups": "기업가 정신 및 스타트업",
+  PREVIEW: "미리보기",
+  "Download PDF": "PDF 다운로드",
+  "I'm interested": "관심 등록",
+  "Youth E.C.H.O Startup: Build with AI as your 7th teammate":
+    "Youth E.C.H.O 스타트업: AI를 일곱 번째 팀원으로 삼아 창업하기",
+  "Think like a founder. Identify a real problem, build your business model and brand, and pitch your startup to a live audience. You’ll work in a team, make real decisions, leave with a startup concept, a confident pitch and a portfolio piece.":
+    "창업가처럼 생각해 보세요. 실제 문제를 찾아 비즈니스 모델과 브랜드를 만들고, 청중 앞에서 스타트업을 소개합니다. 팀과 함께 실질적인 의사결정을 하며 스타트업 아이디어, 자신감 있는 피치, 포트폴리오 결과물을 완성합니다.",
+  "Creative thinking": "창의적 사고",
+  "Business literacy": "비즈니스 이해력",
+  "Responsible AI": "책임 있는 AI 활용",
+  "Intellectual Property": "지식재산",
+  "Middle and high school students": "중·고등학생",
   "Collaborative learning workshop": "협력 학습 워크숍",
   "Free account — Start-up Lab Camp — EPOCHA": "무료 계정 — 스타트업 랩 캠프 — EPOCHA",
   "Start-up Lab Camp": "스타트업 랩 캠프",

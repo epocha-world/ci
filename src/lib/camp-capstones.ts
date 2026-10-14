@@ -1,4 +1,4 @@
-export const capstoneTracks = ["Semester", "International", "Summer"] as const;
+export const capstoneTracks = ["Semester", "International", "Summer", "Other"] as const;
 // Preserve existing field IDs; labels may evolve independently.
 export const capstoneFields = [
   "Business & Retail Strategy",
@@ -12,6 +12,7 @@ export const capstoneFields = [
   "Arts & Cultural Heritage",
   "Health & Wellness Innovation",
   "Law & Policy",
+  "Entrepreneurship & Startups",
 ] as const;
 export const capstoneFieldLabel = (field: string) =>
   field === "Media & Film Production" ? "Media, entertainment, and film production" : field;
@@ -26,6 +27,8 @@ export type CampCapstone = {
   field: (typeof capstoneFields)[number];
   title: string;
   partner: string;
+  partnerUrl?: string;
+  pdfUrl?: string;
   summary: string;
   brief: string;
   deliverables?: string[];
@@ -89,7 +92,8 @@ export function isPublishableCapstone(value: unknown, now = Date.now()): value i
     return (
       ["age", "workshopAddon"].every(
         (key) => typeof item[key] === "string" && (item[key] as string).trim(),
-      ) && ["qualitax", "seagull", "candon"].includes(item.logo as string)
+      ) &&
+      (item.logo === undefined || ["qualitax", "seagull", "candon"].includes(item.logo as string))
     );
   }
   const verified = Date.parse(item.verifiedAt as string),
@@ -122,6 +126,8 @@ const verifiedPublicRecords: readonly CampCapstone[] = [
     field: "AI, Technology & Product Design",
     title: "Mapping the Risk: Classifying AI Systems Under the EU AI Act and Korea's AI Basic Act",
     partner: "QualitaX",
+    partnerUrl: "https://www.qualitax.io/",
+    pdfUrl: "/capstones/qualitax-research.pdf",
     logo: "qualitax",
     summary:
       "Take on the role of a junior policy researcher. Choose an industry (from medical, education, HR, finance, legal, film production, or automotive), identify companies deploying AI and classify their applications under the EU AI Act and Korea's newly enforced AI Basic Act…",
@@ -148,6 +154,8 @@ const verifiedPublicRecords: readonly CampCapstone[] = [
     fieldLabel: "Media, entertainment & film production",
     title: "Staying Connected: Bridging Cultures Through Film in the Age of AI",
     partner: "The Seagull Films",
+    partnerUrl: "https://www.theseagullfilms.com/films/",
+    pdfUrl: "/capstones/seagull-film-production.pdf",
     logo: "seagull",
     summary:
       "Explore film production as a way to practice bridging cultures and fostering genuine dialogue between young people. Frame filmmaking as a tool for empathy and peacebuilding helping youth mobilize around causes as AI reshapes how we connect and communicate…",
@@ -173,6 +181,8 @@ const verifiedPublicRecords: readonly CampCapstone[] = [
     field: "Arts & Cultural Heritage",
     title: "Organizing a Book Launch: Celebrating Filipino Heritage",
     partner: "Candon Youth Movement",
+    partnerUrl: "https://www.facebook.com/CandonYouthMovement/about",
+    pdfUrl: "/capstones/cym-book-launch.pdf",
     logo: "candon",
     summary:
       "Step in as an event organizer and plan a book launch to celebrates Filipino heritage. You will decide how to promote the event, design the guest experience, and add cultural touches (like Filipino music, dance, art, or food) that bring the books’ stories to life…",
@@ -192,7 +202,34 @@ const verifiedPublicRecords: readonly CampCapstone[] = [
     brief:
       "Step in as an event organizer and plan a book launch to celebrates Filipino heritage. You will decide how to promote the event, design the guest experience, and add cultural touches (like Filipino music, dance, art, or food) that bring the books’ stories to life…",
   },
+  {
+    id: "youth-echo-startup",
+    kind: "document-listing",
+    track: "Other",
+    field: "Entrepreneurship & Startups",
+    title: "Youth E.C.H.O Startup: Build with AI as your 7th teammate",
+    partner: "Planet ECHO by KoreaPen",
+    partnerUrl: "https://www.koreapen.org/pe-programs",
+    pdfUrl: "/capstones/yes-global.pdf",
+    summary:
+      "Think like a founder. Identify a real problem, build your business model and brand, and pitch your startup to a live audience. You’ll work in a team, make real decisions, leave with a startup concept, a confident pitch and a portfolio piece.",
+    brief:
+      "Think like a founder. Identify a real problem, build your business model and brand, and pitch your startup to a live audience. You’ll work in a team, make real decisions, leave with a startup concept, a confident pitch and a portfolio piece.",
+    skills: [
+      "Entrepreneurship",
+      "Creative thinking",
+      "Business literacy",
+      "Responsible AI",
+      "Intellectual Property",
+    ],
+    age: "Middle and high school students",
+    format: "In person",
+    location: "TIPS Town, Yeoksam-dong, Seoul",
+    fees: "₩ 2,000,000",
+    workshopAddon: "N/A",
+  },
 ];
+export const capstoneInterestUrl = "https://forms.gle/ALSMCHajnH1JP1qP8";
 export function publishedCapstones(
   records: readonly unknown[] = verifiedPublicRecords,
   now = Date.now(),

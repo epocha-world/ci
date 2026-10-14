@@ -10,6 +10,8 @@ import {
   publishedCapstones,
 } from "@/lib/camp-capstones";
 import { Search } from "lucide-react";
+import { CapstonePartner } from "@/components/camp/CapstonePartner";
+import { CapstoneActions } from "@/components/camp/CapstoneActions";
 export const Route = createFileRoute("/practicums_/startup-lab-camp/open-capstones")({
   head: ({ match }) =>
     createSeoHead({
@@ -132,9 +134,7 @@ function OpenCapstones() {
                 <h2 className="mt-3 text-2xl font-bold leading-tight lg:text-[1.75rem]">
                   {t(item.title)}
                 </h2>
-                <p className="mt-4 font-semibold" data-capstone-partner>
-                  {item.partner}
-                </p>
+                <CapstonePartner item={item} />
                 <p className="my-7 leading-relaxed text-muted-foreground">{t(item.summary)}</p>
                 <ul aria-label={t("Skills")} className="mt-auto flex flex-wrap gap-2">
                   {item.skills.map((skill) => (
@@ -143,9 +143,7 @@ function OpenCapstones() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-5 border-t border-border pt-5 text-sm font-semibold">
-                  coming soon
-                </p>
+                <CapstoneActions item={item} />
               </article>
             ))}
           </div>

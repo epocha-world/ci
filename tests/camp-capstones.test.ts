@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
   isPublishableCapstone,
   publishedCapstones,
@@ -29,14 +30,16 @@ const fixture: CampCapstone = {
 test("the three document-supplied briefs retain exact ages, locations and fees without invented registration data", () => {
   const records = publishedCapstones(undefined, now);
   assert.deepEqual(
-    records.map((item) => [
-      item.partner,
-      item.track,
-      item.age,
-      item.location,
-      item.fees,
-      item.workshopAddon,
-    ]),
+    records
+      .slice(0, 3)
+      .map((item) => [
+        item.partner,
+        item.track,
+        item.age,
+        item.location,
+        item.fees,
+        item.workshopAddon,
+      ]),
     [
       ["QualitaX", "Semester", "17-18", "Online", "₩ 300,000", "N/A"],
       ["The Seagull Films", "International", "14-18", "Hybrid", "₩ 690,000", "N/A"],
@@ -58,6 +61,34 @@ test("the three document-supplied briefs retain exact ages, locations and fees w
     filterCapstones(records, { query: "Filipino", track: "", field: "" })[0].partner,
     "Candon Youth Movement",
   );
+});
+test("all four capstones have matching downloadable PDFs and partner links; new filters find ECHO", () => {
+  const records = publishedCapstones(undefined, now);
+  assert.equal(records.length, 4);
+  assert.deepEqual(
+    records.map((item) => [item.partnerUrl, item.pdfUrl]),
+    [
+      ["https://www.qualitax.io/", "/capstones/qualitax-research.pdf"],
+      ["https://www.theseagullfilms.com/films/", "/capstones/seagull-film-production.pdf"],
+      ["https://www.facebook.com/CandonYouthMovement/about", "/capstones/cym-book-launch.pdf"],
+      ["https://www.koreapen.org/pe-programs", "/capstones/yes-global.pdf"],
+    ],
+  );
+  for (const item of records) {
+    const pdf = readFileSync(new URL(`../public${item.pdfUrl}`, import.meta.url));
+    assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
+  }
+  const filtered = filterCapstones(records, {
+    query: "Responsible AI",
+    track: "Other",
+    field: "Entrepreneurship & Startups",
+  });
+  assert.deepEqual(
+    filtered.map((item) => item.id),
+    ["youth-echo-startup"],
+  );
+  assert.equal(filtered[0].partner, "Planet ECHO by KoreaPen");
+  assert.equal(filtered[0].skills.length, 5);
 });
 test("publication rejects missing fields, unsafe registration links and closed or future verification", () => {
   assert.equal(isPublishableCapstone(fixture, now), true);

@@ -82,5 +82,5 @@ test("all user-facing destinations retain route implementations", () => {
     assert.ok(routes.has(path), `Missing exposed route: ${path}`);
   for (const article of publishedNews())
     assert.ok(routes.has(article.href), `Missing article route: ${article.href}`);
-  assert.equal(publishedCapstones().length, 3);
+  assert.equal(publishedCapstones().length, 4);
 });
