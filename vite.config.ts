@@ -12,6 +12,12 @@ const sites = process.env.EPOCHA_SITES === "1";
 // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
 // @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
 export default defineConfig({
+  vite: {
+    optimizeDeps: {
+      // Router dependencies also import the production JSX runtime during development.
+      include: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],
+    },
+  },
   nitro: false,
   plugins: [
     nitro(
