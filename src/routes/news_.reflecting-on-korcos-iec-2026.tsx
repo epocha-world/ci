@@ -75,7 +75,7 @@ function LinkedParagraph({
   links,
 }: {
   text: string;
-  links: readonly { label: string; href: string }[];
+  links: readonly { label: string; href: string; bold?: boolean }[];
 }) {
   const { t } = useI18n();
   const content = t(text);
@@ -94,7 +94,7 @@ function LinkedParagraph({
           rel="noopener noreferrer"
           className="underline underline-offset-4"
         >
-          {label}
+          {link.bold ? <strong>{label}</strong> : label}
         </a>
       </Fragment>,
     );

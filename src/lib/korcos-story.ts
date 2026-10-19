@@ -59,6 +59,17 @@ export const korcosBlocks = [
     ],
   },
   {
+    text: "We’re not forgetting KoreaPEN (Korea Practice Enterprises Network) bringing Practice Enterprise training to young people.",
+    type: "paragraph",
+    links: [
+      {
+        href: "https://www.linkedin.com/company/koreapen-company/",
+        label: "KoreaPEN (Korea Practice Enterprises Network)",
+        bold: true,
+      },
+    ],
+  },
+  {
     text: "These partnerships matter because no single school can build the ecosystem young people need alone. Strengthening the network of organizations, educators, and community partners around them is essential to sustaining meaningful change.",
     type: "paragraph",
   },
