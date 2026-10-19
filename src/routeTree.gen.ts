@@ -23,6 +23,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AboutOurStoryRouteImport } from './routes/about_.our-story'
 import { Route as AboutSparkedRouteImport } from './routes/about_.sparked'
 import { Route as NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRouteImport } from './routes/news_.digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
+import { Route as NewsReflectingOnKorcosIec2026RouteImport } from './routes/news_.reflecting-on-korcos-iec-2026'
 import { Route as PracticumsHanaroRouteImport } from './routes/practicums_.hanaro'
 import { Route as PracticumsMiraeIndustryRouteImport } from './routes/practicums_.mirae-industry'
 import { Route as PracticumsStartupLabCampRouteImport } from './routes/practicums_.startup-lab-camp'
@@ -105,6 +106,12 @@ const NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRoute =
     path: '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman',
     getParentRoute: () => rootRouteImport,
   } as any)
+const NewsReflectingOnKorcosIec2026Route =
+  NewsReflectingOnKorcosIec2026RouteImport.update({
+    id: '/news_/reflecting-on-korcos-iec-2026',
+    path: '/news/reflecting-on-korcos-iec-2026',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const PracticumsHanaroRoute = PracticumsHanaroRouteImport.update({
   id: '/practicums_/hanaro',
   path: '/practicums/hanaro',
@@ -179,6 +186,7 @@ export interface FileRoutesByFullPath {
   '/about/our-story': typeof AboutOurStoryRoute
   '/about/sparked': typeof AboutSparkedRoute
   '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman': typeof NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRoute
+  '/news/reflecting-on-korcos-iec-2026': typeof NewsReflectingOnKorcosIec2026Route
   '/practicums/hanaro': typeof PracticumsHanaroRoute
   '/practicums/mirae-industry': typeof PracticumsMiraeIndustryRoute
   '/practicums/startup-lab-camp': typeof PracticumsStartupLabCampRouteWithChildren
@@ -205,6 +213,7 @@ export interface FileRoutesByTo {
   '/about/our-story': typeof AboutOurStoryRoute
   '/about/sparked': typeof AboutSparkedRoute
   '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman': typeof NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRoute
+  '/news/reflecting-on-korcos-iec-2026': typeof NewsReflectingOnKorcosIec2026Route
   '/practicums/hanaro': typeof PracticumsHanaroRoute
   '/practicums/mirae-industry': typeof PracticumsMiraeIndustryRoute
   '/practicums/hanaro-marketing/voices-in-motion': typeof PracticumsHanaroMarketingVoicesInMotionRoute
@@ -231,6 +240,7 @@ export interface FileRoutesById {
   '/about_/our-story': typeof AboutOurStoryRoute
   '/about_/sparked': typeof AboutSparkedRoute
   '/news_/digital-media-and-drone-show-technology-with-yan-paul-dubbelman': typeof NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRoute
+  '/news_/reflecting-on-korcos-iec-2026': typeof NewsReflectingOnKorcosIec2026Route
   '/practicums_/hanaro': typeof PracticumsHanaroRoute
   '/practicums_/mirae-industry': typeof PracticumsMiraeIndustryRoute
   '/practicums_/startup-lab-camp': typeof PracticumsStartupLabCampRouteWithChildren
@@ -259,6 +269,7 @@ export interface FileRouteTypes {
     | '/about/our-story'
     | '/about/sparked'
     | '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
+    | '/news/reflecting-on-korcos-iec-2026'
     | '/practicums/hanaro'
     | '/practicums/mirae-industry'
     | '/practicums/startup-lab-camp'
@@ -285,6 +296,7 @@ export interface FileRouteTypes {
     | '/about/our-story'
     | '/about/sparked'
     | '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
+    | '/news/reflecting-on-korcos-iec-2026'
     | '/practicums/hanaro'
     | '/practicums/mirae-industry'
     | '/practicums/hanaro-marketing/voices-in-motion'
@@ -310,6 +322,7 @@ export interface FileRouteTypes {
     | '/about_/our-story'
     | '/about_/sparked'
     | '/news_/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
+    | '/news_/reflecting-on-korcos-iec-2026'
     | '/practicums_/hanaro'
     | '/practicums_/mirae-industry'
     | '/practicums_/startup-lab-camp'
@@ -337,6 +350,7 @@ export interface RootRouteChildren {
   AboutOurStoryRoute: typeof AboutOurStoryRoute
   AboutSparkedRoute: typeof AboutSparkedRoute
   NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRoute: typeof NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRoute
+  NewsReflectingOnKorcosIec2026Route: typeof NewsReflectingOnKorcosIec2026Route
   PracticumsHanaroRoute: typeof PracticumsHanaroRoute
   PracticumsMiraeIndustryRoute: typeof PracticumsMiraeIndustryRoute
   PracticumsStartupLabCampRoute: typeof PracticumsStartupLabCampRouteWithChildren
@@ -441,6 +455,13 @@ declare module '@tanstack/react-router' {
       path: '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
       fullPath: '/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman'
       preLoaderRoute: typeof NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news_/reflecting-on-korcos-iec-2026': {
+      id: '/news_/reflecting-on-korcos-iec-2026'
+      path: '/news/reflecting-on-korcos-iec-2026'
+      fullPath: '/news/reflecting-on-korcos-iec-2026'
+      preLoaderRoute: typeof NewsReflectingOnKorcosIec2026RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/practicums_/hanaro': {
@@ -561,6 +582,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutSparkedRoute: AboutSparkedRoute,
   NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRoute:
     NewsDigitalMediaAndDroneShowTechnologyWithYanPaulDubbelmanRoute,
+  NewsReflectingOnKorcosIec2026Route: NewsReflectingOnKorcosIec2026Route,
   PracticumsHanaroRoute: PracticumsHanaroRoute,
   PracticumsMiraeIndustryRoute: PracticumsMiraeIndustryRoute,
   PracticumsStartupLabCampRoute: PracticumsStartupLabCampRouteWithChildren,

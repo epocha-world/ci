@@ -1,3 +1,4 @@
+import { korcosTitle, korcosSummary } from "./korcos-story.ts";
 import { yanPaulTitle } from "./yan-paul-story.ts";
 export type NewsCategory = "epocha" | "sparked";
 export type NewsArticle = {
@@ -17,6 +18,13 @@ export type NewsArticle = {
  * This catalogue is deployed with the site; it has no CMS or scheduled publishing.
  */
 export const newsArticles: readonly NewsArticle[] = [
+  {
+    id: "korcos-iec-2026",
+    title: korcosTitle,
+    summary: korcosSummary,
+    category: "epocha",
+    href: "/news/reflecting-on-korcos-iec-2026",
+  },
   {
     id: "yan-paul-dubbelman",
     title: yanPaulTitle,

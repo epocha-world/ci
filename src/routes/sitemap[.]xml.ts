@@ -18,6 +18,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/practicums/hanaro-marketing/voices-in-motion", priority: "0.8" },
           { path: "/practicums/mirae-industry", priority: "0.8" },
           { path: "/news", priority: "0.8" },
+          { path: "/news/reflecting-on-korcos-iec-2026", priority: "0.7" },
           {
             path: "/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman",
             priority: "0.7",

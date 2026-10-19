@@ -13,7 +13,7 @@ const fixture: NewsArticle = {
 };
 
 test("the supplied Yan Paul article is published without an invented publication date", () => {
-  const articles = publishedNews();
+  const articles = publishedNews().filter((article) => article.id === "yan-paul-dubbelman");
   assert.equal(articles.length, 1);
   assert.equal(
     articles[0].title,
@@ -63,4 +63,16 @@ test("published news excludes duplicates and invalid records and orders newest f
   const records = Object.freeze([older, fixture, fixture, { ...fixture, title: "" }]);
   assert.deepEqual(publishedNews(records), [fixture, older]);
   assert.equal(records[0], older);
+});
+
+test("KORCOS is published as general news and excluded from Sparked", () => {
+  const articles = publishedNews();
+  const article = articles.find((item) => item.id === "korcos-iec-2026");
+  assert.ok(article);
+  assert.equal(article.category, "epocha");
+  assert.equal(article.title, "Reflecting on KORCOS IEC 2026: From Vision to Reality");
+  assert.equal(article.href, "/news/reflecting-on-korcos-iec-2026");
+  assert.equal(article.publishedAt, undefined);
+  assert.ok(filterNews(articles, "epocha").includes(article));
+  assert.ok(!filterNews(articles, "sparked").includes(article));
 });
