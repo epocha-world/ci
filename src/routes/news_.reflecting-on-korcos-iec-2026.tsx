@@ -21,10 +21,7 @@ function KorcosArticle() {
       <div className="mx-auto max-w-4xl">
         {korcosBlocks.map((block, index) =>
           block.type === "image-row" ? (
-            <div
-              key={index}
-              className="my-10 grid w-full max-w-[616px] grid-cols-3 items-start gap-3 sm:gap-4"
-            >
+            <div key={index} className="my-10 grid w-full grid-cols-3 items-start gap-3 sm:gap-4">
               {block.images.map((image) => (
                 <img
                   key={image.src}
