@@ -126,28 +126,24 @@ export const korcosBlocks = [
   },
   {
     type: "image-row",
-    // Match the Word document's displayed sizes and source crop rectangles.
     images: [
       {
-        src: "/news/korcos-image4.jpeg",
+        src: "/news/korcos-booth.jpg",
         alt: "Jane Jihye Kim at the KORCOS conference booth",
-        width: 1633220,
-        height: 2775585,
-        crop: { top: 2.592, right: 0, bottom: 0 },
+        width: 723,
+        height: 1280,
       },
       {
-        src: "/news/korcos-image3.png",
+        src: "/news/korcos-book-front.png",
         alt: "Decoding Korean Business Culture book front cover",
-        width: 1903095,
-        height: 2914015,
-        crop: { top: 2.022, right: 72.019, bottom: 8.376 },
+        width: 461,
+        height: 722,
       },
       {
-        src: "/news/korcos-image5.png",
+        src: "/news/korcos-book-back.png",
         alt: "Decoding Korean Business Culture book back cover",
-        width: 2021205,
-        height: 2901315,
-        crop: { top: 0, right: 0, bottom: 0 },
+        width: 460,
+        height: 660,
       },
     ],
   },
