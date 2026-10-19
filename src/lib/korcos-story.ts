@@ -125,19 +125,31 @@ export const korcosBlocks = [
     ],
   },
   {
-    type: "image",
-    alt: "KORCOS International Educators Conference 2026 — photo 3",
-    src: "/news/korcos-image3.png",
-  },
-  {
-    type: "image",
-    alt: "KORCOS International Educators Conference 2026 — photo 4",
-    src: "/news/korcos-image4.jpeg",
-  },
-  {
-    type: "image",
-    alt: "KORCOS International Educators Conference 2026 — photo 5",
-    src: "/news/korcos-image5.png",
+    type: "image-row",
+    // Match the Word document's displayed sizes and source crop rectangles.
+    images: [
+      {
+        src: "/news/korcos-image4.jpeg",
+        alt: "Jane Jihye Kim at the KORCOS conference booth",
+        width: 1633220,
+        height: 2775585,
+        crop: { top: 2.592, right: 0, bottom: 0 },
+      },
+      {
+        src: "/news/korcos-image3.png",
+        alt: "Decoding Korean Business Culture book front cover",
+        width: 1903095,
+        height: 2914015,
+        crop: { top: 2.022, right: 72.019, bottom: 8.376 },
+      },
+      {
+        src: "/news/korcos-image5.png",
+        alt: "Decoding Korean Business Culture book back cover",
+        width: 2021205,
+        height: 2901315,
+        crop: { top: 0, right: 0, bottom: 0 },
+      },
+    ],
   },
   {
     text: "Congratulations to North London Collegiate School Jeju whose raffle ticket won a training session with Jane for 15 participants. The session will examine the challenges international and IB schools face when blending global curricula with Korea’s local context, alongside practical ways intercultural understanding can bridge the gap. We look forward to hearing how this resonates with your community.",

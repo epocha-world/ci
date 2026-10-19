@@ -20,7 +20,36 @@ function KorcosArticle() {
     <article className="container-x py-16 md:py-24">
       <div className="mx-auto max-w-4xl">
         {korcosBlocks.map((block, index) =>
-          block.type === "image" ? (
+          block.type === "image-row" ? (
+            <div key={index} className="my-10 flex w-full max-w-[616px] items-start gap-3 sm:gap-4">
+              {block.images.map((image) => {
+                const visibleHeight = 100 - image.crop.top - image.crop.bottom;
+                return (
+                  <div
+                    key={image.src}
+                    className="relative min-w-0 overflow-hidden"
+                    style={{
+                      flex: `${image.width} 1 0%`,
+                      aspectRatio: `${image.width} / ${image.height}`,
+                    }}
+                  >
+                    <img
+                      src={image.src}
+                      alt={t(image.alt)}
+                      loading="lazy"
+                      className="absolute max-w-none"
+                      style={{
+                        width: `${10000 / (100 - image.crop.right)}%`,
+                        height: `${10000 / visibleHeight}%`,
+                        top: `${(-image.crop.top * 100) / visibleHeight}%`,
+                        left: 0,
+                      }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          ) : block.type === "image" ? (
             <img
               key={index}
               src={block.src}
