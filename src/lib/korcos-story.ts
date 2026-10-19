@@ -148,7 +148,7 @@ export const korcosBlocks = [
     ],
   },
   {
-    text: "Congratulations to North London Collegiate School Jeju whose raffle ticket won a training session with Jane for 15 participants. The session will examine the challenges international and IB schools face when blending global curricula with Korea’s local context, alongside practical ways intercultural understanding can bridge the gap. We look forward to hearing how this resonates with your community.",
+    text: "Congratulations to North London Collegiate School Jeju whose raffle ticket won a training session with Jane for 15 participants. The session will examine the challenges international and IB schools face when blending the curriculum with Korea’s local context, alongside practical ways intercultural understanding can bridge the gap. We look forward to hearing how this resonates with your community.",
     type: "paragraph",
   },
   {
