@@ -30,7 +30,7 @@ function KorcosArticle() {
                   width={image.width}
                   height={image.height}
                   loading="lazy"
-                  className="h-auto w-full"
+                  className="aspect-[2/3] h-auto w-full rounded-2xl object-cover"
                 />
               ))}
             </div>
