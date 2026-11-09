@@ -1,27 +1,11 @@
+import type { CapstoneArticleContent } from "./capstone-article";
 import type { Locale } from "./preferences";
 
-type ArticleLink = { text: string; href: string };
-export type ArticleInline = string | { text: string; strong?: boolean; href?: string };
-type Profile = { name: string; credit: string; link: ArticleLink };
-type FilmArticleBlock =
-  | { kind: "intro"; lead: ArticleInline[]; paragraphs: ArticleInline[][]; profile: Profile }
-  | { kind: "paragraph" | "note"; content: ArticleInline[] }
-  | { kind: "heading"; text: string; minor?: boolean }
-  | { kind: "list"; items: ArticleInline[][]; grid?: boolean }
-  | { kind: "quote"; text: string; credit: string }
-  | { kind: "callout"; title: string; paragraphs: string[]; link: ArticleLink }
-  | { kind: "resource"; link: ArticleLink }
-  | { kind: "media"; key: "production" }
-  | { kind: "contacts"; items: { title: string; details: string[]; links: ArticleLink[] }[] }
-  | { kind: "registration"; title: string; paragraphs: ArticleInline[][] }
-  | { kind: "audience"; title: string; items: ArticleInline[][] }
-  | { kind: "slider" };
-
-export type FilmArticleContent = { title: string; subtitle: string; blocks: FilmArticleBlock[] };
-
 // Article copy from News_Filmmaking Capstone_EN-KR.docx, arranged as in the standalone reference.
-export const filmmakingArticle: Record<Locale, FilmArticleContent> = {
+export const filmmakingArticle: Record<Locale, CapstoneArticleContent> = {
   en: {
+    mediaRoot: "/capstones/filmmaking-article/",
+    slideCount: 9,
     title: "Filmmaking Capstone",
     subtitle:
       "A real-world project for young creatives and a standout CAS project for IB Diploma students",
@@ -53,6 +37,8 @@ export const filmmakingArticle: Record<Locale, FilmArticleContent> = {
           ],
         ],
         profile: {
+          photo: "lucie-charles.jpg",
+          photoAlt: "Lucie Charles",
           name: "Lucie Charles | Production Department, Producer, Production Manager",
           credit: "Known for: The Promised Land, Extraction II, The Wheel of Time",
           link: {
@@ -243,6 +229,7 @@ export const filmmakingArticle: Record<Locale, FilmArticleContent> = {
       {
         kind: "heading",
         text: "Program details",
+        id: "program-details",
       },
       {
         kind: "paragraph",
@@ -492,7 +479,10 @@ export const filmmakingArticle: Record<Locale, FilmArticleContent> = {
       },
       {
         kind: "media",
-        key: "production",
+        file: "seagull-journal.jpg",
+        alt: "The Seagull Production Journal",
+        width: 500,
+        height: 300,
       },
       {
         kind: "resource",
@@ -561,6 +551,8 @@ export const filmmakingArticle: Record<Locale, FilmArticleContent> = {
     ],
   },
   ko: {
+    mediaRoot: "/capstones/filmmaking-article/",
+    slideCount: 9,
     title: "나의 첫 영화, 나의 첫 크레디트",
     subtitle: "청소년을 위한 실전 영화 제작 프로젝트 | IB 디플로마 학생을 위한 CAS 프로젝트",
     blocks: [
@@ -596,6 +588,8 @@ export const filmmakingArticle: Record<Locale, FilmArticleContent> = {
           ],
         ],
         profile: {
+          photo: "lucie-charles.jpg",
+          photoAlt: "Lucie Charles",
           name: "Lucie Charles | Production Department, Producer, Production Manager",
           credit: "Known for: The Promised Land, Extraction II, The Wheel of Time",
           link: {
@@ -799,6 +793,7 @@ export const filmmakingArticle: Record<Locale, FilmArticleContent> = {
       {
         kind: "heading",
         text: "프로그램 상세 안내",
+        id: "program-details",
       },
       {
         kind: "paragraph",
@@ -1008,7 +1003,10 @@ export const filmmakingArticle: Record<Locale, FilmArticleContent> = {
       },
       {
         kind: "media",
-        key: "production",
+        file: "seagull-journal.jpg",
+        alt: "The Seagull Production Journal",
+        width: 500,
+        height: 300,
       },
       {
         kind: "resource",

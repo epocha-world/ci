@@ -11,11 +11,9 @@ import {
 } from "@/components/ui/carousel";
 import { useI18n } from "@/i18n";
 import type { CampCapstone } from "@/lib/camp-capstones";
-import type { ArticleInline, FilmArticleContent } from "@/lib/filmmaking-article";
+import type { ArticleInline, CapstoneArticleContent } from "@/lib/capstone-article";
 
-const mediaRoot = "/capstones/filmmaking-article/";
 const articleLink = "font-semibold underline underline-offset-4 hover:text-foreground";
-const slideCount = 9;
 
 function ArticleText({ content }: { content: ArticleInline[] }) {
   return content.map((part, index) => {
@@ -31,9 +29,18 @@ function ArticleText({ content }: { content: ArticleInline[] }) {
   });
 }
 
-function SlideViewer({ pdfUrl }: { pdfUrl: string }) {
+function SlideViewer({
+  pdfUrl,
+  article,
+  title,
+}: {
+  pdfUrl: string;
+  article: CapstoneArticleContent;
+  title: string;
+}) {
   const { locale } = useI18n();
   const ko = locale === "ko";
+  const { mediaRoot, slideCount } = article;
   const [api, setApi] = useState<CarouselApi>();
   const [page, setPage] = useState(1);
 
@@ -51,7 +58,7 @@ function SlideViewer({ pdfUrl }: { pdfUrl: string }) {
 
   return (
     <Carousel
-      aria-label={ko ? "영화 제작 캡스톤 PDF 슬라이드" : "Filmmaking Capstone PDF slides"}
+      aria-label={ko ? `${title} PDF 슬라이드` : `${title} PDF slides`}
       setApi={setApi}
       className="rounded-lg border border-border bg-card p-2 sm:p-3"
     >
@@ -105,13 +112,15 @@ function SlideViewer({ pdfUrl }: { pdfUrl: string }) {
   );
 }
 
-export function FilmmakingArticle({
+export function CapstoneArticle({
   article,
   item,
 }: {
-  article: FilmArticleContent;
+  article: CapstoneArticleContent;
   item: CampCapstone;
 }) {
+  const { t } = useI18n();
+  const { mediaRoot } = article;
   return (
     <article className="min-w-0 space-y-5 text-base leading-relaxed text-foreground/90 lg:col-start-1 lg:row-start-1">
       {article.blocks.map((block, index) => {
@@ -122,7 +131,11 @@ export function FilmmakingArticle({
                 <p className="max-w-2xl text-xl leading-relaxed font-medium sm:text-2xl">
                   <ArticleText content={block.lead} />
                 </p>
-                <div className="grid items-start gap-6 sm:grid-cols-[3fr_2fr]">
+                <div
+                  className={
+                    block.profile ? "grid items-start gap-6 sm:grid-cols-[3fr_2fr]" : undefined
+                  }
+                >
                   <div className="space-y-4">
                     {block.paragraphs.map((paragraph, paragraphIndex) => (
                       <p key={paragraphIndex}>
@@ -130,23 +143,56 @@ export function FilmmakingArticle({
                       </p>
                     ))}
                   </div>
-                  <figure className="space-y-2 border-t border-foreground/70 pt-3 text-sm">
-                    <img
-                      src={mediaRoot + "lucie-charles.jpg"}
-                      alt="Lucie Charles"
-                      width={500}
-                      height={300}
-                      className="h-auto w-full"
-                    />
-                    <figcaption className="space-y-1">
-                      <p className="font-semibold">{block.profile.name}</p>
-                      <p className="text-muted-foreground">{block.profile.credit}</p>
-                      <a href={block.profile.link.href} className={articleLink}>
-                        {block.profile.link.text}
-                      </a>
-                    </figcaption>
-                  </figure>
+                  {block.profile && (
+                    <figure className="space-y-2 border-t border-foreground/70 pt-3 text-sm">
+                      <img
+                        src={mediaRoot + block.profile.photo}
+                        alt={block.profile.photoAlt}
+                        width={500}
+                        height={300}
+                        className="h-auto w-full"
+                      />
+                      <figcaption className="space-y-1">
+                        <p className="font-semibold">{block.profile.name}</p>
+                        <p className="text-muted-foreground">{block.profile.credit}</p>
+                        <a href={block.profile.link.href} className={articleLink}>
+                          {block.profile.link.text}
+                        </a>
+                      </figcaption>
+                    </figure>
+                  )}
                 </div>
+              </section>
+            );
+          case "mentors":
+            return (
+              <section key={index} className="space-y-6">
+                <h2 className="pt-5 text-2xl leading-tight font-bold text-foreground">
+                  {block.title}
+                </h2>
+                {block.items.map(({ name, photo, bio }) => (
+                  <div
+                    key={name}
+                    className="grid items-start gap-4 border-t border-border pt-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]"
+                  >
+                    <img
+                      src={mediaRoot + photo}
+                      alt=""
+                      width={1024}
+                      height={1024}
+                      loading="lazy"
+                      className="h-auto w-36 max-w-full sm:w-full"
+                    />
+                    <div className="space-y-3">
+                      <h3 className="text-lg font-bold text-foreground">{name}</h3>
+                      {bio.map((paragraph, i) => (
+                        <p key={i}>
+                          <ArticleText content={paragraph} />
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </section>
             );
           case "paragraph":
@@ -171,11 +217,7 @@ export function FilmmakingArticle({
             ) : (
               <h2
                 key={index}
-                id={
-                  block.text === "Program details" || block.text === "프로그램 상세 안내"
-                    ? "program-details"
-                    : undefined
-                }
+                id={block.id}
                 className="scroll-mt-24 pt-5 text-2xl leading-tight font-bold text-foreground"
               >
                 {block.text}
@@ -245,16 +287,25 @@ export function FilmmakingArticle({
             return (
               <img
                 key={index}
-                src={mediaRoot + "seagull-journal.jpg"}
-                alt="The Seagull Production Journal"
-                width={500}
-                height={300}
+                src={mediaRoot + block.file}
+                alt={block.alt}
+                width={block.width}
+                height={block.height}
                 loading="lazy"
                 className="h-auto max-w-full"
               />
             );
           case "slider":
-            return item.pdfUrl && <SlideViewer key={index} pdfUrl={item.pdfUrl} />;
+            return (
+              item.pdfUrl && (
+                <SlideViewer
+                  key={item.id}
+                  pdfUrl={item.pdfUrl}
+                  article={article}
+                  title={t(item.title)}
+                />
+              )
+            );
           case "audience":
             return (
               <section

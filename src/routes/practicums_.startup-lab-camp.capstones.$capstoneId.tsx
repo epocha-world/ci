@@ -1,13 +1,20 @@
 import { CapstonePartner } from "@/components/camp/CapstonePartner";
 import { CapstoneActions } from "@/components/camp/CapstoneActions";
-import { FilmmakingArticle } from "@/components/camp/FilmmakingArticle";
+import { CapstoneArticle } from "@/components/camp/CapstoneArticle";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { useI18n } from "@/i18n";
 import { createSeoHead } from "@/lib/seo";
 import { publishedCapstones, capstoneFieldLabel, type CampCapstone } from "@/lib/camp-capstones";
 import { getCapstoneDetail, type CapstoneDetailContent } from "@/lib/capstone-details";
-import { filmmakingArticle, type FilmArticleContent } from "@/lib/filmmaking-article";
+import type { CapstoneArticleContent } from "@/lib/capstone-article";
+import { filmmakingArticle } from "@/lib/filmmaking-article";
+import { qualitaxArticle } from "@/lib/qualitax-article";
+
+const capstoneArticles: Partial<Record<string, typeof filmmakingArticle>> = {
+  "bridging-cultures-through-film": filmmakingArticle,
+  "mapping-ai-risk": qualitaxArticle,
+};
 export const Route = createFileRoute("/practicums_/startup-lab-camp/capstones/$capstoneId")({
   loader: ({ params }) => {
     const capstone = publishedCapstones().find((item) => item.id === params.capstoneId);
@@ -44,8 +51,7 @@ function CapstoneDetail() {
   const item = Route.useLoaderData();
   const { t, locale } = useI18n();
   const detail = getCapstoneDetail(item.id, locale);
-  const article =
-    item.id === "bridging-cultures-through-film" ? filmmakingArticle[locale] : undefined;
+  const article = capstoneArticles[item.id]?.[locale];
   return (
     <section className="bg-background text-foreground">
       {article && (
@@ -110,7 +116,7 @@ function ProgramDetails({
 }: {
   item: CampCapstone;
   detail: CapstoneDetailContent;
-  article?: FilmArticleContent;
+  article?: CapstoneArticleContent;
 }) {
   const { t, locale } = useI18n();
   const isKorean = locale === "ko";
@@ -186,7 +192,7 @@ function ProgramDetails({
       </aside>
 
       {article ? (
-        <FilmmakingArticle article={article} item={item} />
+        <CapstoneArticle article={article} item={item} />
       ) : (
         <div className="space-y-9 lg:col-start-1 lg:row-start-1">
           {detail.sections.map((section) => (
