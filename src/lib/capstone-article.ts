@@ -1,7 +1,20 @@
 type ArticleLink = { text: string; href: string };
 export type ArticleInline = string | { text: string; strong?: boolean; href?: string };
 
-type Profile = { name: string; photo: string; photoAlt: string; credit: string; link: ArticleLink };
+type Profile = {
+  name: string;
+  photo: string;
+  photoAlt: string;
+  dimensions?: [width: number, height: number];
+  credit: string;
+  link: ArticleLink;
+};
+export type CapstoneFaqItem = {
+  question: string;
+  answer: (
+    { kind: "paragraph"; content: ArticleInline[] } | { kind: "list"; items: ArticleInline[][] }
+  )[];
+};
 type Mentor = {
   name: string;
   photo: string;
@@ -21,6 +34,7 @@ type CapstoneArticleBlock =
   | { kind: "contacts"; items: { title: string; details: string[]; links: ArticleLink[] }[] }
   | { kind: "registration"; title: string; paragraphs: ArticleInline[][] }
   | { kind: "audience"; title: string; items: ArticleInline[][] }
+  | { kind: "faq"; title: string; items: CapstoneFaqItem[] }
   | { kind: "slider" };
 
 export type CapstoneArticleContent = {

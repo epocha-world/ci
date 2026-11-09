@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
-import { ArrowDownToLine, ArrowUpRight, Mail } from "lucide-react";
+import { ArrowDownToLine, ArrowUpRight, ChevronDown, Mail } from "lucide-react";
 import { CapstoneActions } from "@/components/camp/CapstoneActions";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +15,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useI18n } from "@/i18n";
 import type { CampCapstone } from "@/lib/camp-capstones";
 import type { ArticleInline, CapstoneArticleContent } from "@/lib/capstone-article";
@@ -144,12 +151,12 @@ export function CapstoneArticle({
                     ))}
                   </div>
                   {block.profile && (
-                    <figure className="space-y-2 border-t border-foreground/70 pt-3 text-sm">
+                    <figure className="space-y-2 text-sm">
                       <img
                         src={mediaRoot + block.profile.photo}
                         alt={block.profile.photoAlt}
-                        width={500}
-                        height={300}
+                        width={block.profile.dimensions?.[0] ?? 500}
+                        height={block.profile.dimensions?.[1] ?? 300}
                         className="h-auto w-full"
                       />
                       <figcaption className="space-y-1">
@@ -307,6 +314,52 @@ export function CapstoneArticle({
                   title={t(item.title)}
                 />
               )
+            );
+          case "faq":
+            return (
+              <Collapsible key={index} asChild>
+                <section id="program-details" className="scroll-mt-24 pt-4">
+                  <h2 className="text-2xl font-bold text-foreground">
+                    <CollapsibleTrigger className="group flex min-h-11 w-full cursor-pointer items-center justify-between gap-4 border-b border-border py-2 text-left hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+                      {block.title}
+                      <ChevronDown
+                        aria-hidden="true"
+                        className="size-5 shrink-0 text-muted-foreground transition-transform group-data-[state=open]:rotate-180 motion-reduce:transition-none"
+                      />
+                    </CollapsibleTrigger>
+                  </h2>
+                  <CollapsibleContent>
+                    <Accordion type="single" collapsible>
+                      {block.items.map(({ question, answer }) => (
+                        <AccordionItem key={question} value={question}>
+                          <AccordionTrigger className="min-h-11 text-left">
+                            {question}
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="flex flex-col gap-3 text-base leading-relaxed">
+                              {answer.map((part, partIndex) =>
+                                part.kind === "paragraph" ? (
+                                  <p key={partIndex}>
+                                    <ArticleText content={part.content} />
+                                  </p>
+                                ) : (
+                                  <ul key={partIndex} className="list-disc pl-5">
+                                    {part.items.map((entry, entryIndex) => (
+                                      <li key={entryIndex}>
+                                        <ArticleText content={entry} />
+                                      </li>
+                                    ))}
+                                  </ul>
+                                ),
+                              )}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  </CollapsibleContent>
+                </section>
+              </Collapsible>
             );
           case "audience":
             return (

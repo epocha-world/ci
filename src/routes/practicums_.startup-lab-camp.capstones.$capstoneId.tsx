@@ -122,8 +122,9 @@ function ProgramDetails({
 }) {
   const { t, locale } = useI18n();
   const isKorean = locale === "ko";
+  const isFilmmaking = item.id === "bridging-cultures-through-film";
   const fee = item.intake?.feeUsd ? `${item.fees} (${item.intake.feeUsd})` : item.fees;
-  const deadline = item.intake?.closesAt;
+  const deadline = isFilmmaking ? undefined : item.intake?.closesAt;
   const deadlineText = deadline
     ? new Intl.DateTimeFormat(isKorean ? "ko-KR" : "en-US", {
         timeZone: "Asia/Seoul",
@@ -133,11 +134,11 @@ function ProgramDetails({
       }).format(new Date(deadline))
     : undefined;
   const facts: { label: string; value: ReactNode }[] = [
-    { label: t("Age"), value: item.age ? t(item.age) : undefined },
+    { label: t("Age"), value: !isFilmmaking && item.age ? t(item.age) : undefined },
     { label: t("Schedule"), value: detail.schedule },
-    { label: t("Format"), value: detail.format },
+    { label: t("Format"), value: isFilmmaking ? t(item.format) : detail.format },
     {
-      label: isKorean ? "수업 언어" : "Language of instruction",
+      label: isKorean ? "수업 언어" : isFilmmaking ? "Language" : "Language of instruction",
       value: isKorean ? "영어" : "English",
     },
     { label: isKorean ? "학생 1인당 참가비" : "Fee per student", value: fee },
@@ -157,10 +158,12 @@ function ProgramDetails({
           (article ? "lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto" : "")
         }
       >
-        <h2 className="text-2xl font-bold">
-          {isKorean ? "신청 및 참가비" : "Registration and fees"}
-        </h2>
-        <dl className="mt-6 space-y-4">
+        {!isFilmmaking && (
+          <h2 className="text-2xl font-bold">
+            {isKorean ? "신청 및 참가비" : "Registration and fees"}
+          </h2>
+        )}
+        <dl className={isFilmmaking ? "space-y-4" : "mt-6 space-y-4"}>
           {facts.map(({ label, value }) =>
             value ? (
               <div key={label}>
@@ -170,18 +173,22 @@ function ProgramDetails({
             ) : null,
           )}
         </dl>
-        <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-          {isKorean
-            ? "정원이 차면 조기 마감하며, 이후 신청자는 다음 기수 참가 대상이 될 수 있습니다."
-            : "Registration closes early if the program fills. Additional applicants may be considered for the next cohort."}
-        </p>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {isKorean
-            ? "접수 순서대로 신청서를 검토합니다. 참가 안내를 받은 뒤 참가비를 납부하면 등록이 확정됩니다."
-            : "We review applications in the order we receive them. Registration is confirmed once you pay the fee after receiving your acceptance notice."}
-        </p>
+        {!isFilmmaking && (
+          <>
+            <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+              {isKorean
+                ? "정원이 차면 조기 마감하며, 이후 신청자는 다음 기수 참가 대상이 될 수 있습니다."
+                : "Registration closes early if the program fills. Additional applicants may be considered for the next cohort."}
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {isKorean
+                ? "접수 순서대로 신청서를 검토합니다. 참가 안내를 받은 뒤 참가비를 납부하면 등록이 확정됩니다."
+                : "We review applications in the order we receive them. Registration is confirmed once you pay the fee after receiving your acceptance notice."}
+            </p>
+          </>
+        )}
         <CapstoneActions item={item} variant="detail" />
-        {item.pdfUrl && (
+        {!isFilmmaking && item.pdfUrl && (
           <a
             href={item.pdfUrl}
             target="_blank"

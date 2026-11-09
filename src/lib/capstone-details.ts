@@ -21,12 +21,12 @@ const ibGuidance =
 const details: Record<string, Record<Locale, CapstoneDetailContent>> = {
   "bridging-cultures-through-film": {
     en: {
-      schedule: "January 9–April 17, 2027 · Saturdays, 09:00–12:00 KST · 15 sessions, 45 hours",
+      schedule: "January 9–April 17, 2027 · Saturdays, 09:00–12:00 KST",
       format: "Hybrid · Online classes and in-person sessions",
       sections: [],
     },
     ko: {
-      schedule: "2027년 1월 9일~4월 17일 · 매주 토요일 09:00~12:00 KST · 총 15회, 45시간",
+      schedule: "2027년 1월 9일~4월 17일 · 매주 토요일 09:00~12:00 KST",
       format: "혼합형 · 온라인 수업과 대면 활동 병행",
       sections: [],
     },
