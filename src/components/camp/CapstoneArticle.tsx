@@ -170,29 +170,31 @@ export function CapstoneArticle({
                 <h2 className="pt-5 text-2xl leading-tight font-bold text-foreground">
                   {block.title}
                 </h2>
-                {block.items.map(({ name, photo, bio }) => (
-                  <div
-                    key={name}
-                    className="grid items-start gap-4 border-t border-border pt-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]"
-                  >
-                    <img
-                      src={mediaRoot + photo}
-                      alt=""
-                      width={1024}
-                      height={1024}
-                      loading="lazy"
-                      className="h-auto w-36 max-w-full sm:w-full"
-                    />
-                    <div className="space-y-3">
-                      <h3 className="text-lg font-bold text-foreground">{name}</h3>
-                      {bio.map((paragraph, i) => (
-                        <p key={i}>
-                          <ArticleText content={paragraph} />
-                        </p>
-                      ))}
+                {block.items.map(
+                  ({ name, photo, dimensions: [width, height] = [1024, 1024], bio }) => (
+                    <div
+                      key={name}
+                      className="grid items-start gap-4 border-t border-border pt-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]"
+                    >
+                      <img
+                        src={mediaRoot + photo}
+                        alt=""
+                        width={width}
+                        height={height}
+                        loading="lazy"
+                        className="h-auto w-36 max-w-full sm:w-full"
+                      />
+                      <div className="space-y-3">
+                        <h3 className="text-lg font-bold text-foreground">{name}</h3>
+                        {bio.map((paragraph, i) => (
+                          <p key={i}>
+                            <ArticleText content={paragraph} />
+                          </p>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ),
+                )}
               </section>
             );
           case "paragraph":

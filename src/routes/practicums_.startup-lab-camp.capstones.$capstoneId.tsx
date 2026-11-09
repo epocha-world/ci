@@ -8,12 +8,14 @@ import { createSeoHead } from "@/lib/seo";
 import { publishedCapstones, capstoneFieldLabel, type CampCapstone } from "@/lib/camp-capstones";
 import { getCapstoneDetail, type CapstoneDetailContent } from "@/lib/capstone-details";
 import type { CapstoneArticleContent } from "@/lib/capstone-article";
+import { cymArticle } from "@/lib/cym-article";
 import { filmmakingArticle } from "@/lib/filmmaking-article";
 import { qualitaxArticle } from "@/lib/qualitax-article";
 
 const capstoneArticles: Partial<Record<string, typeof filmmakingArticle>> = {
   "bridging-cultures-through-film": filmmakingArticle,
   "mapping-ai-risk": qualitaxArticle,
+  "filipino-heritage-book-launch": cymArticle,
 };
 export const Route = createFileRoute("/practicums_/startup-lab-camp/capstones/$capstoneId")({
   loader: ({ params }) => {

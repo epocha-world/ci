@@ -2,7 +2,12 @@ type ArticleLink = { text: string; href: string };
 export type ArticleInline = string | { text: string; strong?: boolean; href?: string };
 
 type Profile = { name: string; photo: string; photoAlt: string; credit: string; link: ArticleLink };
-type Mentor = { name: string; photo: string; bio: ArticleInline[][] };
+type Mentor = {
+  name: string;
+  photo: string;
+  dimensions?: [width: number, height: number];
+  bio: ArticleInline[][];
+};
 type CapstoneArticleBlock =
   | { kind: "intro"; lead: ArticleInline[]; paragraphs: ArticleInline[][]; profile?: Profile }
   | { kind: "mentors"; title: string; items: Mentor[] }
