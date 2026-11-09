@@ -122,9 +122,10 @@ function ProgramDetails({
 }) {
   const { t, locale } = useI18n();
   const isKorean = locale === "ko";
-  const isFilmmaking = item.id === "bridging-cultures-through-film";
+  const hasCompactSummary =
+    item.id === "bridging-cultures-through-film" || item.id === "filipino-heritage-book-launch";
   const fee = item.intake?.feeUsd ? `${item.fees} (${item.intake.feeUsd})` : item.fees;
-  const deadline = isFilmmaking ? undefined : item.intake?.closesAt;
+  const deadline = hasCompactSummary ? undefined : item.intake?.closesAt;
   const deadlineText = deadline
     ? new Intl.DateTimeFormat(isKorean ? "ko-KR" : "en-US", {
         timeZone: "Asia/Seoul",
@@ -134,11 +135,11 @@ function ProgramDetails({
       }).format(new Date(deadline))
     : undefined;
   const facts: { label: string; value: ReactNode }[] = [
-    { label: t("Age"), value: !isFilmmaking && item.age ? t(item.age) : undefined },
+    { label: t("Age"), value: !hasCompactSummary && item.age ? t(item.age) : undefined },
     { label: t("Schedule"), value: detail.schedule },
-    { label: t("Format"), value: isFilmmaking ? t(item.format) : detail.format },
+    { label: t("Format"), value: hasCompactSummary ? t(item.format) : detail.format },
     {
-      label: isKorean ? "수업 언어" : isFilmmaking ? "Language" : "Language of instruction",
+      label: isKorean ? "수업 언어" : hasCompactSummary ? "Language" : "Language of instruction",
       value: isKorean ? "영어" : "English",
     },
     { label: isKorean ? "학생 1인당 참가비" : "Fee per student", value: fee },
@@ -158,12 +159,12 @@ function ProgramDetails({
           (article ? "lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto" : "")
         }
       >
-        {!isFilmmaking && (
+        {!hasCompactSummary && (
           <h2 className="text-2xl font-bold">
             {isKorean ? "신청 및 참가비" : "Registration and fees"}
           </h2>
         )}
-        <dl className={isFilmmaking ? "space-y-4" : "mt-6 space-y-4"}>
+        <dl className={hasCompactSummary ? "space-y-4" : "mt-6 space-y-4"}>
           {facts.map(({ label, value }) =>
             value ? (
               <div key={label}>
@@ -173,7 +174,7 @@ function ProgramDetails({
             ) : null,
           )}
         </dl>
-        {!isFilmmaking && (
+        {!hasCompactSummary && (
           <>
             <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
               {isKorean
@@ -188,7 +189,7 @@ function ProgramDetails({
           </>
         )}
         <CapstoneActions item={item} variant="detail" />
-        {!isFilmmaking && item.pdfUrl && (
+        {!hasCompactSummary && item.pdfUrl && (
           <a
             href={item.pdfUrl}
             target="_blank"

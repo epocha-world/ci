@@ -33,12 +33,12 @@ const details: Record<string, Record<Locale, CapstoneDetailContent>> = {
   },
   "filipino-heritage-book-launch": {
     en: {
-      schedule: "January 9–April 3, 2027 · Saturdays, 09:00–11:30 KST · 13 sessions, 35 hours",
+      schedule: "January 9–April 3, 2027 · Saturdays, 09:00–11:30 KST",
       format: "In-person sessions at Gyeonggi Suwon International School (GSIS)",
       sections: [],
     },
     ko: {
-      schedule: "2027년 1월 9일~4월 3일 · 매주 토요일 09:00~11:30 KST · 총 13회, 35시간",
+      schedule: "2027년 1월 9일~4월 3일 · 매주 토요일 09:00~11:30 KST",
       format: "경기수원외국인학교(GSIS) 대면 수업",
       sections: [],
     },
