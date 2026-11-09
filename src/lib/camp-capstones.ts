@@ -16,6 +16,16 @@ export const capstoneFields = [
 ] as const;
 export const capstoneFieldLabel = (field: string) =>
   field === "Media & Film Production" ? "Media, entertainment, and film production" : field;
+type ConfirmedIntake = {
+  feeUsd: string;
+  closesAt: string;
+  /** Set when the program team confirms that the cohort has filled. */
+  closedEarly?: boolean;
+};
+
+export const capstoneApplicationUrl = "https://forms.gle/qfMyLmqfkVhjd6y29";
+const registrationDeadline = "2026-12-19T23:59:00+09:00";
+
 export type CampCapstone = {
   id: string;
   kind?: "document-listing";
@@ -40,6 +50,7 @@ export type CampCapstone = {
   registrationUrl?: string;
   verifiedAt?: string;
   closesAt?: string;
+  intake?: ConfirmedIntake;
 };
 const requiredText = [
   "id",
@@ -82,7 +93,7 @@ export function isPublishableCapstone(value: unknown, now = Date.now()): value i
   )
     return false;
   if (item.kind === "document-listing") {
-    // The user supplied display briefs but no application URL or intake dates.
+    // Display briefs remain accessible after their separately confirmed intake closes.
     if (
       ["registrationUrl", "verifiedAt", "closesAt", "dates", "deliverables"].some(
         (key) => item[key] !== undefined,
@@ -117,20 +128,20 @@ export function isPublishableCapstone(value: unknown, now = Date.now()): value i
 /** Operator-maintained public records only. Add records after verifying the brief,
  * partner, dates, fee and HTTPS registration destination. No demo opportunities.
  * Display briefs supplied in the 2026-09-21 document are explicitly marked document-listing.
- * They do not imply a verified registration endpoint, intake dates or remaining seats.
+ * Only records with a separately confirmed intake use the official shared application form.
  */
 const verifiedPublicRecords: readonly CampCapstone[] = [
   {
     id: "mapping-ai-risk",
     track: "Semester",
     field: "AI, Technology & Product Design",
-    title: "Mapping the Risk: Classifying AI Systems Under the EU AI Act and Korea's AI Basic Act",
+    title: "Project AI with QualitaX",
     partner: "QualitaX",
     partnerUrl: "https://www.qualitax.io/",
     pdfUrl: "/capstones/qualitax-research.pdf",
     logo: "qualitax",
     summary:
-      "Take on the role of a junior policy researcher. Choose an industry (from medical, education, HR, finance, legal, film production, or automotive), identify companies deploying AI and classify their applications under the EU AI Act and Korea's newly enforced AI Basic Act…",
+      "Work with AI governance mentors to research real applications and classify their risks under the EU AI Act and Korea's AI Basic Act.",
     skills: [
       "Research",
       "Critical thinking",
@@ -142,6 +153,7 @@ const verifiedPublicRecords: readonly CampCapstone[] = [
     location: "Online",
     format: "Online",
     fees: "₩ 300,000",
+    intake: { feeUsd: "US$225", closesAt: registrationDeadline },
     workshopAddon: "N/A",
     kind: "document-listing",
     brief:
@@ -152,13 +164,13 @@ const verifiedPublicRecords: readonly CampCapstone[] = [
     track: "International",
     field: "Media & Film Production",
     fieldLabel: "Media, entertainment & film production",
-    title: "Staying Connected: Bridging Cultures Through Film in the Age of AI",
+    title: "Filmmaking Capstone",
     partner: "The Seagull Films",
     partnerUrl: "https://www.theseagullfilms.com/films/",
     pdfUrl: "/capstones/seagull-film-production.pdf",
     logo: "seagull",
     summary:
-      "Explore film production as a way to practice bridging cultures and fostering genuine dialogue between young people. Frame filmmaking as a tool for empathy and peacebuilding helping youth mobilize around causes as AI reshapes how we connect and communicate…",
+      "Make a short film with professional mentors, explore AI and belonging, and build a portfolio through a real-world CAS project.",
     skills: [
       "Storytelling",
       "Critical thinking",
@@ -169,7 +181,8 @@ const verifiedPublicRecords: readonly CampCapstone[] = [
     age: "14-18",
     location: "Hybrid",
     format: "Hybrid",
-    fees: "₩ 690,000",
+    fees: "₩ 1,700,000",
+    intake: { feeUsd: "US$1,270", closesAt: registrationDeadline },
     workshopAddon: "N/A",
     kind: "document-listing",
     brief:
@@ -179,13 +192,13 @@ const verifiedPublicRecords: readonly CampCapstone[] = [
     id: "filipino-heritage-book-launch",
     track: "International",
     field: "Arts & Cultural Heritage",
-    title: "Organizing a Book Launch: Celebrating Filipino Heritage",
+    title: "Student-led CAS project",
     partner: "Candon Youth Movement",
     partnerUrl: "https://www.facebook.com/CandonYouthMovement/about",
     pdfUrl: "/capstones/cym-book-launch.pdf",
     logo: "candon",
     summary:
-      "Step in as an event organizer and plan a book launch to celebrates Filipino heritage. You will decide how to promote the event, design the guest experience, and add cultural touches (like Filipino music, dance, art, or food) that bring the books’ stories to life…",
+      "Celebrate Filipino heritage with the Candon Youth Movement by planning a book launch and building a companion store.",
     skills: [
       "Event management",
       "Program design",
@@ -196,7 +209,8 @@ const verifiedPublicRecords: readonly CampCapstone[] = [
     age: "14-18",
     location: "Hybrid",
     format: "Hybrid",
-    fees: "₩ 650,000",
+    fees: "₩ 1,400,000",
+    intake: { feeUsd: "US$1,100", closesAt: registrationDeadline },
     workshopAddon: "N/A",
     kind: "document-listing",
     brief:
@@ -241,6 +255,15 @@ export function publishedCapstones(
     return true;
   });
 }
+
+export function openCapstoneListings() {
+  return publishedCapstones().filter(({ id }) => id !== "youth-echo-startup");
+}
+
+export function isCapstoneRegistrationOpen(intake: ConfirmedIntake, now = Date.now()) {
+  return !intake.closedEarly && now < Date.parse(intake.closesAt);
+}
+
 export type CapstoneFilters = { query: string; track: string; field: string };
 export function filterCapstones(
   records: readonly CampCapstone[],

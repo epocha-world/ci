@@ -1,5 +1,8 @@
 import { korcosTitle, korcosSummary } from "./korcos-story.ts";
 import { yanPaulTitle } from "./yan-paul-story.ts";
+
+export const naverBlogUrl = "https://blog.naver.com/epocha-world";
+
 export type NewsCategory = "epocha" | "sparked";
 export type NewsArticle = {
   id: string;

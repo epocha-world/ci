@@ -5,12 +5,13 @@ import { AnalyticsConsentBanner } from "@/components/AnalyticsConsentBanner";
 import { PreferencesControls } from "@/components/PreferencesControls";
 import { openAnalyticsSettings } from "@/lib/analytics-consent";
 import { useI18n } from "@/i18n";
+import { naverBlogUrl } from "@/lib/news";
 
 const columns = [
   {
     title: "Explore",
     links: [
-      ["/", "Home"],
+      ["/home", "Home"],
       ["/practicums", "Practicums"],
       ["/news", "News"],
       ["/about", "About"],
@@ -109,6 +110,16 @@ export function Footer() {
                     </Link>
                   </li>
                 ))}
+                {column.title === "Connect" && (
+                  <li>
+                    <a
+                      href={naverBlogUrl}
+                      className="inline-flex min-h-8 items-center hover:text-lime"
+                    >
+                      {t("Naver Blog")}
+                    </a>
+                  </li>
+                )}
                 {column.title === "KR Legal" && (
                   <li>
                     <button

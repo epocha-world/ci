@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/Logo.svg";
 import { PreferencesControls } from "@/components/PreferencesControls";
 import { useI18n } from "@/i18n";
+import { naverBlogUrl } from "@/lib/news";
 
 interface NavItem {
   to: string;
@@ -12,7 +13,7 @@ interface NavItem {
 }
 
 const nav: NavItem[] = [
-  { to: "/", label: "Home" },
+  { to: "/home", label: "Home" },
   {
     to: "/practicums",
     label: "Practicums",
@@ -34,6 +35,32 @@ const nav: NavItem[] = [
     ],
   },
 ];
+
+export function LandingHeader() {
+  const { t } = useI18n();
+  const button =
+    "inline-flex min-h-11 shrink-0 items-center rounded-full px-3 text-sm font-semibold sm:px-6 sm:text-base";
+  return (
+    <header className="surface-dark bg-ink">
+      <div className="landing-container flex min-h-20 items-center justify-between gap-2 py-3 lg:min-h-24">
+        <Link to="/" aria-label={t("EPOCHA home")} className="min-w-0">
+          <img src={logo} alt="EPOCHA" width={160} height={64} className="h-auto w-28 sm:w-40" />
+        </Link>
+        <nav aria-label={t("Main navigation")} className="flex items-center gap-2 sm:gap-4">
+          <Link to="/home" className={`${button} bg-cream text-ink hover:bg-white`}>
+            {t("Website")}
+          </Link>
+          <a
+            href={naverBlogUrl}
+            className={`${button} bg-[oklch(0.67_0.18_145)] text-ink hover:bg-[oklch(0.73_0.18_145)]`}
+          >
+            {t("Naver Blog")}
+          </a>
+        </nav>
+      </div>
+    </header>
+  );
+}
 
 export function Header() {
   const { t } = useI18n();
@@ -85,7 +112,7 @@ export function Header() {
                   to={item.to}
                   onClick={close}
                   className="py-3 text-sm text-foreground/85 transition-colors hover:text-lime"
-                  activeOptions={{ exact: item.to === "/" }}
+                  activeOptions={{ exact: item.to === "/home" }}
                   activeProps={{ className: "text-lime" }}
                 >
                   {t(item.label)}

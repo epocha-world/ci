@@ -7,7 +7,7 @@ import {
   capstoneTracks,
   capstoneFieldLabel,
   filterCapstones,
-  publishedCapstones,
+  openCapstoneListings,
 } from "@/lib/camp-capstones";
 import { Search } from "lucide-react";
 import { CapstonePartner } from "@/components/camp/CapstonePartner";
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/practicums_/startup-lab-camp/open-capston
       description: "Explore partner briefs by leadership track and field.",
       path: "/practicums/startup-lab-camp/open-capstones",
     }),
-  loader: () => publishedCapstones(),
+  loader: () => openCapstoneListings(),
   component: OpenCapstones,
 });
 function OpenCapstones() {

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { SITE_URL } from "@/lib/seo";
+import { openCapstoneListings } from "@/lib/camp-capstones";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -8,16 +9,22 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         const entries = [
           { path: "/", priority: "1.0" },
+          { path: "/home", priority: "0.9" },
           { path: "/practicums", priority: "0.9" },
           { path: "/practicums/startup-lab-camp", priority: "0.8" },
           { path: "/practicums/startup-lab-camp/practicum/leadership-tracks", priority: "0.7" },
           { path: "/practicums/startup-lab-camp/practicum/coaching-program", priority: "0.7" },
           { path: "/practicums/startup-lab-camp/how-it-works", priority: "0.7" },
           { path: "/practicums/startup-lab-camp/open-capstones", priority: "0.8" },
+          ...openCapstoneListings().map(({ id }) => ({
+            path: `/practicums/startup-lab-camp/capstones/${id}`,
+            priority: "0.7",
+          })),
           { path: "/practicums/hanaro", priority: "0.8" },
           { path: "/practicums/hanaro-marketing/voices-in-motion", priority: "0.8" },
           { path: "/practicums/mirae-industry", priority: "0.8" },
           { path: "/news", priority: "0.8" },
+          { path: "/news/meet-epocha", priority: "0.8" },
           { path: "/news/reflecting-on-korcos-iec-2026", priority: "0.7" },
           {
             path: "/news/digital-media-and-drone-show-technology-with-yan-paul-dubbelman",

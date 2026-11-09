@@ -58,6 +58,7 @@ test("all user-facing destinations retain route implementations", () => {
   const routes = declaredRoutes();
   for (const path of [
     "/",
+    "/home",
     "/practicums",
     "/practicums/hanaro",
     "/practicums/mirae-industry",
@@ -69,6 +70,7 @@ test("all user-facing destinations retain route implementations", () => {
     "/practicums/startup-lab-camp/open-capstones",
     "/practicums/startup-lab-camp/capstones/$capstoneId",
     "/news",
+    "/news/meet-epocha",
     "/about",
     "/about/our-story",
     "/about/sparked",

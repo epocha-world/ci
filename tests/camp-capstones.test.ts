@@ -6,6 +6,8 @@ import {
   publishedCapstones,
   filterCapstones,
   capstoneFieldLabel,
+  openCapstoneListings,
+  isCapstoneRegistrationOpen,
   type CampCapstone,
 } from "../src/lib/camp-capstones.ts";
 const now = Date.parse("2026-09-18T00:00:00Z");
@@ -27,7 +29,7 @@ const fixture: CampCapstone = {
   verifiedAt: "2026-09-01T00:00:00Z",
   closesAt: "2026-10-01T00:00:00Z",
 };
-test("the three document-supplied briefs retain exact ages, locations and fees without invented registration data", () => {
+test("the three confirmed capstones retain their ages and locations and show the approved fees", () => {
   const records = publishedCapstones(undefined, now);
   assert.deepEqual(
     records
@@ -42,8 +44,8 @@ test("the three document-supplied briefs retain exact ages, locations and fees w
       ]),
     [
       ["QualitaX", "Semester", "17-18", "Online", "₩ 300,000", "N/A"],
-      ["The Seagull Films", "International", "14-18", "Hybrid", "₩ 690,000", "N/A"],
-      ["Candon Youth Movement", "International", "14-18", "Hybrid", "₩ 650,000", "N/A"],
+      ["The Seagull Films", "International", "14-18", "Hybrid", "₩ 1,700,000", "N/A"],
+      ["Candon Youth Movement", "International", "14-18", "Hybrid", "₩ 1,400,000", "N/A"],
     ],
   );
   for (const item of records) {
@@ -61,6 +63,23 @@ test("the three document-supplied briefs retain exact ages, locations and fees w
     filterCapstones(records, { query: "Filipino", track: "", field: "" })[0].partner,
     "Candon Youth Movement",
   );
+});
+test("confirmed registrations switch at the KST deadline or when a program fills up", () => {
+  const records = openCapstoneListings();
+  assert.deepEqual(
+    records.map(({ intake }) => intake?.feeUsd),
+    ["US$225", "US$1,270", "US$1,100"],
+  );
+  const deadline = Date.parse("2026-12-19T14:59:00Z");
+  for (const { id, intake } of records) {
+    assert.ok(intake, id);
+    assert.equal(Date.parse(intake.closesAt), deadline);
+    assert.equal(isCapstoneRegistrationOpen(intake, deadline - 1), true);
+    assert.equal(isCapstoneRegistrationOpen(intake, deadline), false);
+    assert.equal(isCapstoneRegistrationOpen({ ...intake, closedEarly: true }, deadline - 1), false);
+  }
+  assert.equal(publishedCapstones(undefined, deadline).length, 4);
+  assert.ok(!records.some(({ id }) => id === "youth-echo-startup"));
 });
 test("all four capstones have matching downloadable PDFs and partner links; new filters find ECHO", () => {
   const records = publishedCapstones(undefined, now);

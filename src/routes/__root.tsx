@@ -4,13 +4,14 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import { Header } from "@/components/Header";
+import { Header, LandingHeader } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import hero from "@/assets/hero.jpg";
 import logo from "@/assets/Logo.svg";
@@ -170,6 +171,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const { t } = useI18n();
+  const isLanding = useRouterState({
+    select: (state) => state.matches.at(-1)?.routeId === "/",
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -180,7 +184,7 @@ function RootComponent() {
         >
           {t("Skip to content")}
         </a>
-        <Header />
+        {isLanding ? <LandingHeader /> : <Header />}
         <main id="main-content" className="flex-1" tabIndex={-1}>
           <Outlet />
         </main>
