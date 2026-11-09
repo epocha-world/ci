@@ -45,12 +45,12 @@ const details: Record<string, Record<Locale, CapstoneDetailContent>> = {
   },
   "mapping-ai-risk": {
     en: {
-      schedule: "January 4–March 22, 2027 · Mondays, 15:30–17:00 KST · 10 sessions of 90 minutes",
+      schedule: "January 4–March 22, 2027 · Mondays, 15:30–17:00 KST",
       format: "Online",
       sections: [],
     },
     ko: {
-      schedule: "2027년 1월 4일~3월 22일 · 월요일 15:30~17:00 KST · 회당 90분, 총 10회",
+      schedule: "2027년 1월 4일~3월 22일 · 월요일 15:30~17:00 KST",
       format: "온라인",
       sections: [],
     },

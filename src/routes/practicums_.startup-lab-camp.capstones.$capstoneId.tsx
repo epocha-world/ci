@@ -123,7 +123,9 @@ function ProgramDetails({
   const { t, locale } = useI18n();
   const isKorean = locale === "ko";
   const hasCompactSummary =
-    item.id === "bridging-cultures-through-film" || item.id === "filipino-heritage-book-launch";
+    item.id === "bridging-cultures-through-film" ||
+    item.id === "filipino-heritage-book-launch" ||
+    item.id === "mapping-ai-risk";
   const fee = item.intake?.feeUsd ? `${item.fees} (${item.intake.feeUsd})` : item.fees;
   const deadline = hasCompactSummary ? undefined : item.intake?.closesAt;
   const deadlineText = deadline
