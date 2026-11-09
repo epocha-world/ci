@@ -1,11 +1,13 @@
 import { CapstonePartner } from "@/components/camp/CapstonePartner";
 import { CapstoneActions } from "@/components/camp/CapstoneActions";
+import { FilmmakingArticle } from "@/components/camp/FilmmakingArticle";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { useI18n } from "@/i18n";
 import { createSeoHead } from "@/lib/seo";
 import { publishedCapstones, capstoneFieldLabel, type CampCapstone } from "@/lib/camp-capstones";
 import { getCapstoneDetail, type CapstoneDetailContent } from "@/lib/capstone-details";
+import { filmmakingArticle, type FilmArticleContent } from "@/lib/filmmaking-article";
 export const Route = createFileRoute("/practicums_/startup-lab-camp/capstones/$capstoneId")({
   loader: ({ params }) => {
     const capstone = publishedCapstones().find((item) => item.id === params.capstoneId);
@@ -42,23 +44,57 @@ function CapstoneDetail() {
   const item = Route.useLoaderData();
   const { t, locale } = useI18n();
   const detail = getCapstoneDetail(item.id, locale);
+  const article =
+    item.id === "bridging-cultures-through-film" ? filmmakingArticle[locale] : undefined;
   return (
     <section className="bg-background text-foreground">
-      <div className="container-x py-16 md:py-24">
-        <Link
-          to="/practicums/startup-lab-camp/open-capstones"
-          className="font-semibold underline underline-offset-4"
-        >
-          {t("Back to open capstones")}
-        </Link>
-        <p className="mt-10 text-sm text-muted-foreground">
-          {t(item.track)} · {t(item.fieldLabel ?? capstoneFieldLabel(item.field))}
-        </p>
-        <h1 className="mt-5 max-w-4xl text-4xl font-bold md:text-6xl">{t(item.title)}</h1>
-        <CapstonePartner item={item} />
-        <p className="mt-8 max-w-3xl text-lg leading-relaxed">{detail?.lead ?? t(item.summary)}</p>
+      {article && (
+        <header className="bg-[#1a120d] text-cream">
+          <div className="container-x py-14 sm:py-20">
+            <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-widest">
+              {t("Practicums")}
+              <span aria-hidden="true" className="h-px w-12 bg-lime" />
+            </p>
+            <h1 className="mt-4 max-w-2xl text-4xl leading-tight font-bold sm:text-6xl md:text-7xl">
+              {article.title}
+            </h1>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed font-semibold sm:text-xl">
+              {article.subtitle}
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+              <CapstoneActions item={item} variant="detail" />
+              <a
+                href="#program-details"
+                className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline-offset-4 hover:underline"
+              >
+                {locale === "ko" ? "프로그램 상세 안내" : "Program details"}{" "}
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </div>
+        </header>
+      )}
+      <div className={article ? "container-x pb-16 md:pb-24" : "container-x py-16 md:py-24"}>
+        {!article && (
+          <>
+            <Link
+              to="/practicums/startup-lab-camp/open-capstones"
+              className="font-semibold underline underline-offset-4"
+            >
+              {t("Back to open capstones")}
+            </Link>
+            <p className="mt-10 text-sm text-muted-foreground">
+              {t(item.track)} · {t(item.fieldLabel ?? capstoneFieldLabel(item.field))}
+            </p>
+            <h1 className="mt-5 max-w-4xl text-4xl font-bold md:text-6xl">{t(item.title)}</h1>
+            <CapstonePartner item={item} />
+            <p className="mt-8 max-w-3xl text-lg leading-relaxed">
+              {detail?.lead ?? t(item.summary)}
+            </p>
+          </>
+        )}
         {detail ? (
-          <ProgramDetails item={item} detail={detail} />
+          <ProgramDetails item={item} detail={detail} article={article} />
         ) : (
           <LegacyCapstoneDetails item={item} />
         )}
@@ -67,7 +103,15 @@ function CapstoneDetail() {
   );
 }
 
-function ProgramDetails({ item, detail }: { item: CampCapstone; detail: CapstoneDetailContent }) {
+function ProgramDetails({
+  item,
+  detail,
+  article,
+}: {
+  item: CampCapstone;
+  detail: CapstoneDetailContent;
+  article?: FilmArticleContent;
+}) {
   const { t, locale } = useI18n();
   const isKorean = locale === "ko";
   const fee = item.intake?.feeUsd ? `${item.fees} (${item.intake.feeUsd})` : item.fees;
@@ -99,7 +143,12 @@ function ProgramDetails({ item, detail }: { item: CampCapstone; detail: Capstone
 
   return (
     <div className="mt-12 grid items-start gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-      <aside className="rounded-3xl border border-border bg-card p-6 sm:p-8 lg:col-start-2">
+      <aside
+        className={
+          "rounded-3xl border border-border bg-card p-6 sm:p-8 lg:col-start-2 " +
+          (article ? "lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto" : "")
+        }
+      >
         <h2 className="text-2xl font-bold">
           {isKorean ? "신청 및 참가비" : "Registration and fees"}
         </h2>
@@ -136,74 +185,78 @@ function ProgramDetails({ item, detail }: { item: CampCapstone; detail: Capstone
         )}
       </aside>
 
-      <div className="space-y-9 lg:col-start-1 lg:row-start-1">
-        {detail.sections.map((section) => (
-          <section key={section.title}>
-            <h2 className="text-2xl font-bold">{section.title}</h2>
-            {section.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="mt-4 leading-relaxed text-foreground/85">
-                {paragraph}
-              </p>
-            ))}
-            {section.resources && (
-              <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
-                {section.resources.map(({ href, label }) => (
-                  <li key={href}>
-                    <a
-                      href={href}
-                      className="inline-flex min-h-11 items-center underline underline-offset-4"
-                    >
-                      {label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
+      {article ? (
+        <FilmmakingArticle article={article} item={item} />
+      ) : (
+        <div className="space-y-9 lg:col-start-1 lg:row-start-1">
+          {detail.sections.map((section) => (
+            <section key={section.title}>
+              <h2 className="text-2xl font-bold">{section.title}</h2>
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="mt-4 leading-relaxed text-foreground/85">
+                  {paragraph}
+                </p>
+              ))}
+              {section.resources && (
+                <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
+                  {section.resources.map(({ href, label }) => (
+                    <li key={href}>
+                      <a
+                        href={href}
+                        className="inline-flex min-h-11 items-center underline underline-offset-4"
+                      >
+                        {label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+          <section>
+            <h2 className="text-2xl font-bold">
+              {isKorean ? "수료증" : "Certificate of completion"}
+            </h2>
+            <p className="mt-4 leading-relaxed text-foreground/85">
+              {isKorean
+                ? "전 과정을 마친 학생은 KoreaPEN과 PEN Worldwide의 인증을 받은 수료증을 받습니다."
+                : "Students who complete the entire program receive a certificate of completion certified by KoreaPEN and PEN Worldwide."}
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
+              <li>
+                <a
+                  href="https://www.koreapen.org/pe-programs"
+                  className="inline-flex min-h-11 items-center underline underline-offset-4"
+                >
+                  KoreaPEN
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://penworldwide.org/"
+                  className="inline-flex min-h-11 items-center underline underline-offset-4"
+                >
+                  PEN Worldwide
+                </a>
+              </li>
+            </ul>
           </section>
-        ))}
-        <section>
-          <h2 className="text-2xl font-bold">
-            {isKorean ? "수료증" : "Certificate of completion"}
-          </h2>
-          <p className="mt-4 leading-relaxed text-foreground/85">
-            {isKorean
-              ? "전 과정을 마친 학생은 KoreaPEN과 PEN Worldwide의 인증을 받은 수료증을 받습니다."
-              : "Students who complete the entire program receive a certificate of completion certified by KoreaPEN and PEN Worldwide."}
-          </p>
-          <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
-            <li>
-              <a
-                href="https://www.koreapen.org/pe-programs"
-                className="inline-flex min-h-11 items-center underline underline-offset-4"
-              >
-                KoreaPEN
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://penworldwide.org/"
-                className="inline-flex min-h-11 items-center underline underline-offset-4"
-              >
-                PEN Worldwide
-              </a>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h2 className="text-2xl font-bold">{t("Contact Us")}</h2>
-          <p className="mt-4 leading-relaxed text-foreground/85">
-            {isKorean
-              ? "신청, 교육 과정, 학교 및 단체 참여에 관한 문의는 EPOCHA로 연락해 주세요."
-              : "Contact EPOCHA with questions about registration, the program, or group participation."}
-          </p>
-          <Link
-            to="/connect"
-            className="mt-3 inline-flex min-h-11 items-center font-semibold underline underline-offset-4"
-          >
-            {t("Contact EPOCHA")}
-          </Link>
-        </section>
-      </div>
+          <section>
+            <h2 className="text-2xl font-bold">{t("Contact Us")}</h2>
+            <p className="mt-4 leading-relaxed text-foreground/85">
+              {isKorean
+                ? "신청, 교육 과정, 학교 및 단체 참여에 관한 문의는 EPOCHA로 연락해 주세요."
+                : "Contact EPOCHA with questions about registration, the program, or group participation."}
+            </p>
+            <Link
+              to="/connect"
+              className="mt-3 inline-flex min-h-11 items-center font-semibold underline underline-offset-4"
+            >
+              {t("Contact EPOCHA")}
+            </Link>
+          </section>
+        </div>
+      )}
     </div>
   );
 }
