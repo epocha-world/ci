@@ -22,24 +22,24 @@ const details: Record<string, Record<Locale, CapstoneDetailContent>> = {
   "bridging-cultures-through-film": {
     en: {
       schedule: "January 9–April 17, 2027 · Saturdays, 09:00–12:00 KST",
-      format: "Hybrid · Online classes and in-person sessions",
+      format: "Hybrid",
       sections: [],
     },
     ko: {
       schedule: "2027년 1월 9일~4월 17일 · 매주 토요일 09:00~12:00 KST",
-      format: "혼합형 · 온라인 수업과 대면 활동 병행",
+      format: "온·오프라인 병행",
       sections: [],
     },
   },
   "filipino-heritage-book-launch": {
     en: {
       schedule: "January 9–April 3, 2027 · Saturdays, 09:00–11:30 KST",
-      format: "In-person sessions at Gyeonggi Suwon International School (GSIS)",
+      format: "On-site: GSIS",
       sections: [],
     },
     ko: {
       schedule: "2027년 1월 9일~4월 3일 · 매주 토요일 09:00~11:30 KST",
-      format: "경기수원외국인학교(GSIS) 대면 수업",
+      format: "대면: GSIS",
       sections: [],
     },
   },

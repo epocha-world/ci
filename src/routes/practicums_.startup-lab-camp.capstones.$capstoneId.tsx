@@ -139,7 +139,7 @@ function ProgramDetails({
   const facts: { label: string; value: ReactNode }[] = [
     { label: t("Age"), value: item.age ? t(item.age) : undefined },
     { label: t("Schedule"), value: detail.schedule },
-    { label: t("Format"), value: hasCompactSummary ? t(item.format) : detail.format },
+    { label: t("Format"), value: detail.format },
     {
       label: isKorean ? "수업 언어" : hasCompactSummary ? "Language" : "Language of instruction",
       value: isKorean ? "영어" : "English",
