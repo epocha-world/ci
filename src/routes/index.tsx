@@ -204,6 +204,11 @@ function LandingPage() {
                 <p className="text-sm font-semibold text-muted-foreground uppercase">
                   {t("Practicums")}
                 </p>
+                {item.age && (
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {t("Ages {{range}}", { range: item.age.replace("-", "–") })}
+                  </p>
+                )}
                 <h3 className="mt-3 text-2xl leading-tight font-bold lg:text-[1.75rem]">
                   {t(item.title)}
                 </h3>

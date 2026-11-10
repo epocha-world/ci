@@ -137,7 +137,7 @@ function ProgramDetails({
       }).format(new Date(deadline))
     : undefined;
   const facts: { label: string; value: ReactNode }[] = [
-    { label: t("Age"), value: !hasCompactSummary && item.age ? t(item.age) : undefined },
+    { label: t("Age"), value: item.age ? t(item.age) : undefined },
     { label: t("Schedule"), value: detail.schedule },
     { label: t("Format"), value: hasCompactSummary ? t(item.format) : detail.format },
     {

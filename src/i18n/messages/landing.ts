@@ -26,6 +26,7 @@ export default {
   Off: "끄기",
   "Made with AI support": "AI의 도움을 받아 제작했습니다",
   "EPOCHA — Practicums and news": "EPOCHA 실무 프로그램과 소식",
+  "Ages {{range}}": "{{range}}세 대상",
   "Filmmaking Capstone": "영화 제작 캡스톤",
   "Student-led CAS project": "학생 주도 CAS 프로젝트",
   "Project AI with QualitaX": "QualitaX와 함께하는 AI 프로젝트",
